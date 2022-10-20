@@ -1,0 +1,17 @@
+{
+  "itemGroup.onyxarcanix": "Onyx Arcanix",
+  "item.onyxarcanix.ritual_knife": "Ritual Knife",
+  "item.onyxarcanix.onyx_iron_rod": "Onyx Iron Rod",
+  "item.onyxarcanix.onyx_iron": "Onyx Iron",
+  "item.onyxarcanix.onyx_chisel": "Onyx Chisel",
+  "item.onyxarcanix.onyx_apple": "Onyx Apple",
+  "death.attack.sacrifice.player": "%s sacrificed themself whilst fighting %s",
+  "death.attack.sacrifice": "%s sacrificed themself",
+  "death.attack.playerSacrifice.player": "%s was sacrificed by %s",
+  "death.attack.playerSacrifice": "%s was sacrificed by %s",
+  "death.attack.onyxApple.player": "%s spread their soul too thin whilst fighting %s",
+  "death.attack.onyxApple": "%s spread their soul too thin",
+  "block.onyxarcanix.runed_stone_bricks": "Runed Stone Bricks",
+  "block.onyxarcanix.onyx": "Onyx",
+  "block.onyxarcanix.stone_pedestal": "Stone Pedestal"
+}

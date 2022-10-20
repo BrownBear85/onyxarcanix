@@ -1,0 +1,24 @@
+{
+ 	"credit": "Made with Blockbench",
+ 	"texture_size": [64, 64],
+ 	"textures": {
+ 		"1": "onyxarcanix:block/runed_stone_bricks/rune_b",
+ 		"2": "onyxarcanix:block/runed_stone_bricks/blank",
+ 		"particle": "onyxarcanix:block/runed_stone_bricks/rune_a"
+ 	},
+ 	"elements": [
+ 		{
+ 			"name": "block",
+ 			"from": [0, 0, 0],
+ 			"to": [16, 16, 16],
+ 			"faces": {
+ 				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
+ 				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+ 				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
+ 				"west": {"uv": [0, 0, 16, 16], "texture": "#1"},
+ 				"up": {"uv": [16, 16, 0, 0], "rotation": 180, "texture": "#2"},
+ 				"down": {"uv": [0, 16, 16, 0], "rotation": 90, "texture": "#2"}
+ 			}
+ 		}
+ 	]
+ }

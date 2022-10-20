@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "  M",
+        "gM ",
+        "/g "
+    ],
+    "key": {
+        "g": {
+            "item": "minecraft:gold_ingot"
+        },
+        "/": {
+            "item": "minecraft:stick"
+        },
+        "M": {
+            "item": "onyxarcanix:onyx_iron"
+        }
+    },
+    "result": {
+        "item": "onyxarcanix:ritual_knife",
+        "count": 1
+    },
+    "group": "ritual_knife"
+}

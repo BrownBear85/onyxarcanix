@@ -1,0 +1,85 @@
+{
+  "variants": {
+    "rune=blank": {
+      "model": "onyxarcanix:block/runed_stone_bricks/blank"
+    },
+    "rune=a": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_a"
+    },
+    "rune=b": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_b"
+    },
+    "rune=c": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_c"
+    },
+    "rune=d": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_d"
+    },
+    "rune=e": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_e"
+    },
+    "rune=f": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_f"
+    },
+    "rune=g": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_g"
+    },
+    "rune=h": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_h"
+    },
+    "rune=i": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_i"
+    },
+    "rune=j": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_j"
+    },
+    "rune=k": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_k"
+    },
+    "rune=l": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_l"
+    },
+    "rune=m": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_m"
+    },
+    "rune=n": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_n"
+    },
+    "rune=o": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_o"
+    },
+    "rune=p": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_p"
+    },
+    "rune=q": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_q"
+    },
+    "rune=r": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_r"
+    },
+    "rune=s": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_s"
+    },
+    "rune=t": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_t"
+    },
+    "rune=u": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_u"
+    },
+    "rune=v": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_v"
+    },
+    "rune=w": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_w"
+    },
+    "rune=x": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_x"
+    },
+    "rune=y": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_y"
+    },
+    "rune=z": {
+      "model": "onyxarcanix:block/runed_stone_bricks/rune_z"
+    }
+  }
+}
