@@ -3,6 +3,7 @@ package com.brownbear85.onyxarcanix;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ItemInit;
+import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.player.Player;
@@ -54,7 +55,7 @@ public class OnyxArcanix {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            ModNetworking.register();
         }
     }
 }
