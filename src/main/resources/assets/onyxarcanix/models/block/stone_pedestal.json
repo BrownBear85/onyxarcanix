@@ -2,6 +2,6 @@
 	"credit": "Made with Blockbench",
 	"parent": "onyxarcanix:block/pedestal",
 	"textures": {
-		"0": "onyxarcanix:block/onyx"
+		"0": "onyxarcanix:block/runed_stone_bricks/blank"
 	}
 }

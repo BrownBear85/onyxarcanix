@@ -6,11 +6,11 @@ import net.minecraft.network.chat.Component;
 import java.util.List;
 
 public class ClientAccess {
-    public static void ritualKnifeTooltip(List<Component> components) {
-        if (Screen.hasShiftDown()) {
-            components.add(Component.literal("press shift for more info"));
+    public static void chiselableTooltip(List<Component> components) {
+        if (!Screen.hasShiftDown()) {
+            components.add(Component.translatable("runed_block.onyxarcanix.shift"));
         } else {
-            components.add(Component.literal("test message"));
+            components.add(Component.translatable("runed_block.onyxarcanix.description"));
         }
     }
 }

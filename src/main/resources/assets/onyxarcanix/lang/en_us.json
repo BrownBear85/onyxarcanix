@@ -11,7 +11,9 @@
   "death.attack.playerSacrifice": "%s was sacrificed by %s",
   "death.attack.onyxApple.player": "%s spread their soul too thin whilst fighting %s",
   "death.attack.onyxApple": "%s spread their soul too thin",
-  "block.onyxarcanix.runed_stone_bricks": "Runed Stone Bricks",
+  "block.onyxarcanix.stone_pedestal": "Stone Pedestal",
+  "block.onyxarcanix.runed_stone_bricks": "Blank Stone Bricks",
   "block.onyxarcanix.onyx": "Onyx",
-  "block.onyxarcanix.stone_pedestal": "Stone Pedestal"
+  "runed_block.onyxarcanix.shift": "\u00A77Chiselable (SHIFT)",
+  "runed_block.onyxarcanix.description": "\u00A77Use a \u00A78Chisel\u00A77 on this block to apply a rune"
 }

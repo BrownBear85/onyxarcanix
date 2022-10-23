@@ -76,10 +76,4 @@ public class RitualKnife extends SwordItem {
         // yellow gold color: return Mth.hsvToRgb(0.1325F, 0.704F, 0.98F);
         return Mth.hsvToRgb((float)(System.currentTimeMillis() % 2000) / 2000, 0.8F, 1.0F);
     }
-
-//    @Override
-//    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
-//        super.appendHoverText(stack, level, components, flag);
-//        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.ritualKnifeTooltip(components));
-//    }
 }
