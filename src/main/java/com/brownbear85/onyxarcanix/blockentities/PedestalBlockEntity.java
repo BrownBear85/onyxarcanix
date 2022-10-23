@@ -77,9 +77,7 @@ public class PedestalBlockEntity extends BlockEntity {
             removeItem(player, hand);
         } else if (!this.level.isClientSide()) {
             ItemStack newStack = itemHandler.insertItem(0, stack, false);
-            if (!player.isCreative()) {
-                player.setItemInHand(hand, newStack);
-            }
+            player.setItemInHand(hand, newStack);
         }
     }
 
