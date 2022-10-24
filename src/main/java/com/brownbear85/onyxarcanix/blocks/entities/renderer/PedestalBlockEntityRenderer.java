@@ -21,8 +21,12 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
 
     }
 
-    private float time(PedestalBlockEntity blockEntity) {
-        return blockEntity.getLevel().getGameTime();
+    private float rotation() {
+        return System.currentTimeMillis() % 360000 * 0.001F;
+    }
+
+    private double bobHeight() {
+        return Math.sin(System.currentTimeMillis() % Math.round(Math.PI * 4000) * 0.002F) * 0.1;
     }
 
     @Override
@@ -31,9 +35,9 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
 
         ItemStack stack = blockEntity.getRenderStack();
         poseStack.pushPose();
-        poseStack.translate(0.5F, 1.5F + Math.sin((time(blockEntity) * 0.1)) * 0.05, 0.5F);
+        poseStack.translate(0.5F, 1.5F + bobHeight(), 0.5F);
         poseStack.scale(0.5F, 0.5F, 0.5F);
-        poseStack.mulPose(Vector3f.YP.rotation(((time(blockEntity) % 7200) / 20)));
+        poseStack.mulPose(Vector3f.YP.rotation(rotation()));
 
         itemRenderer.renderStatic(stack, ItemTransforms.TransformType.FIXED, getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos()),
                 OverlayTexture.NO_OVERLAY, poseStack, bufferSource, 1);
