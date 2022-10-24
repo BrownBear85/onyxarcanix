@@ -98,13 +98,13 @@ public class PedestalBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        this.itemHandler.deserializeNBT(nbt.getCompound("Inventory"));
+        this.itemHandler.deserializeNBT(nbt.getCompound("item"));
     }
 
     @Override
     protected void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.put("Inventory", this.itemHandler.serializeNBT());
+        nbt.put("Item", this.itemHandler.serializeNBT());
     }
 
     @Override
