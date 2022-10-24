@@ -1,6 +1,6 @@
-package com.brownbear85.onyxarcanix.blockentities.renderer;
+package com.brownbear85.onyxarcanix.blocks.entities.renderer;
 
-import com.brownbear85.onyxarcanix.blockentities.PedestalBlockEntity;
+import com.brownbear85.onyxarcanix.blocks.entities.PedestalBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;

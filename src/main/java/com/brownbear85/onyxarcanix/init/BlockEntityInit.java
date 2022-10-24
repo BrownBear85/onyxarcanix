@@ -1,7 +1,7 @@
 package com.brownbear85.onyxarcanix.init;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
-import com.brownbear85.onyxarcanix.blockentities.PedestalBlockEntity;
+import com.brownbear85.onyxarcanix.blocks.entities.PedestalBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

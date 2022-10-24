@@ -1,6 +1,6 @@
 package com.brownbear85.onyxarcanix.blocks;
 
-import com.brownbear85.onyxarcanix.blockentities.PedestalBlockEntity;
+import com.brownbear85.onyxarcanix.blocks.entities.PedestalBlockEntity;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

@@ -1,8 +1,7 @@
-package com.brownbear85.onyxarcanix.blockentities;
+package com.brownbear85.onyxarcanix.blocks.entities;
 
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
-import com.brownbear85.onyxarcanix.networking.packets.ExampleC2SPacket;
 import com.brownbear85.onyxarcanix.networking.packets.ItemStackSyncC2SPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

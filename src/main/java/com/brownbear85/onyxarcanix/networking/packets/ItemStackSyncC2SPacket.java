@@ -1,13 +1,9 @@
 package com.brownbear85.onyxarcanix.networking.packets;
 
-import com.brownbear85.onyxarcanix.blockentities.PedestalBlockEntity;
+import com.brownbear85.onyxarcanix.blocks.entities.PedestalBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkEvent;

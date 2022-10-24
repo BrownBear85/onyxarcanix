@@ -1,7 +1,7 @@
 package com.brownbear85.onyxarcanix.events;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
-import com.brownbear85.onyxarcanix.blockentities.renderer.PedestalBlockEntityRenderer;
+import com.brownbear85.onyxarcanix.blocks.entities.renderer.PedestalBlockEntityRenderer;
 import com.brownbear85.onyxarcanix.blocks.Chiselable;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 
