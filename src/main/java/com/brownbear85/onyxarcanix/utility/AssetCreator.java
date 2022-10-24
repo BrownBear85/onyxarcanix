@@ -1,4 +1,4 @@
-package com.brownbear85.onyxarcanix.init;
+package com.brownbear85.onyxarcanix.utility;
 
 import java.io.File;
 import java.io.FileWriter;

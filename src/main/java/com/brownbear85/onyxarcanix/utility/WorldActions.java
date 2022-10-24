@@ -20,7 +20,7 @@ public class WorldActions {
     }
 
     /**
-     * Replace blocks in an odd cubical area around a center point.
+     * Replace blocks in a cubical area around a center point.
      * @param level the level to do replace blocks in
      * @param pos the center of the cube
      * @param set blockstate to set blocks to

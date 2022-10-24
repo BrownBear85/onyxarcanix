@@ -59,6 +59,33 @@ public class Chiselable extends Block {
         serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5, 60, 0.3, 0.3, 0.3, 0);
     }
 
+    public static Runes getRuneFromString(String str) {
+        for (Runes rune : Runes.values()) {
+            if (rune.toString().toLowerCase().equals(str)) {
+                return rune;
+            }
+        }
+        return Runes.BLANK;
+    }
+
+    public static final String[][] RUNE_NAME_TABLE = {
+            {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"},
+            {"air", "b", "c", "diamond", "earth", "the forest", "gold", "h", "iron", "golem", "llama", "the lake", "the mountains", "n", "obsidian", "the plains", "dolphin", "r", "silver", "tadpole", "u", "valley", "water", "axolotl", "magic", "fire"}
+    };
+
+    public static String getRuneName(String rune) {
+        for (int i = 0; i < RUNE_NAME_TABLE[0].length; i++) {
+            if (RUNE_NAME_TABLE[0][i].toLowerCase().equals(rune)) {
+                return RUNE_NAME_TABLE[1][i];
+            }
+        }
+        return "";
+    }
+
+    public static String getRuneName(Runes rune) {
+        return getRuneName(rune.toString());
+    }
+
     public enum Runes implements StringRepresentable {
         BLANK("blank"), A("a"), B("b"), C("c"), D("d"), E("e"),
         F("f"), G("g"), H("h"), I("i"), J("j"), K("k"), L("l"),

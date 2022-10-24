@@ -14,6 +14,12 @@
   "block.onyxarcanix.stone_pedestal": "Stone Pedestal",
   "block.onyxarcanix.runed_stone_bricks": "Blank Stone Bricks",
   "block.onyxarcanix.onyx": "Onyx",
-  "runed_block.onyxarcanix.shift": "\u00A77Chiselable (SHIFT)",
-  "runed_block.onyxarcanix.description": "\u00A77Use a \u00A78Chisel\u00A77 on this block to apply a rune"
+  "runed_block.onyxarcanix.shift": "\u00A78Chiselable (SHIFT)",
+  "runed_block.onyxarcanix.description": "\u00A78Use a \u00A77Chisel\u00A78 on this block to apply a rune",
+  "chisel.onyxarcanix.currentRune":"\u00A78Selected Rune: \u00A7o\u00A77Rune of %s",
+  "chisel.onyxarcanix.description":"\u00A78Scroll to change selected rune",
+  "key.category.onyxarcanix.category": "Onyx Arcanix",
+  "key.onyxarcanix.cycle_rune": "Cycle Selected Rune in Chisel",
+
+  "color_codes": "https://htmlcolorcodes.com/minecraft-color-codes/"
 }
