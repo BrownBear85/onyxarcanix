@@ -1,6 +1,6 @@
 {
-  "runed_block.onyxarcanix.shift": "\u00A78Chiselable (SHIFT)",
-  "runed_block.onyxarcanix.description": "\u00A78Use a \u00A77Chisel\u00A78 on this block to apply a rune",
+  "runed_block.onyxarcanix.shift": "Chiselable (SHIFT)",
+  "runed_block.onyxarcanix.description": "Use a \u00A77Chisel\u00A78 on this block to apply a rune",
   "rune.onyxarcanix.a": "air",
   "rune.onyxarcanix.b": "onyx",
   "rune.onyxarcanix.c": "death",
