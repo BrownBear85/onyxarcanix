@@ -2,8 +2,8 @@ package com.brownbear85.onyxarcanix.items;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
 import com.brownbear85.onyxarcanix.init.ItemInit;
-import com.brownbear85.onyxarcanix.utility.EntityRituals;
-import com.brownbear85.onyxarcanix.utility.WorldActions;
+import com.brownbear85.onyxarcanix.util.EntityRituals;
+import com.brownbear85.onyxarcanix.util.WorldActions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;

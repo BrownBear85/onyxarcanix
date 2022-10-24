@@ -24,9 +24,9 @@ public class ItemStackSyncC2SPacket {
 
     public ItemStackSyncC2SPacket(FriendlyByteBuf buf) {
         List<ItemStack> collection = buf.readCollection(ArrayList::new, FriendlyByteBuf::readItem);
-        itemStackHandler = new ItemStackHandler(collection.size());
+        this.itemStackHandler = new ItemStackHandler(collection.size());
         for (int i = 0; i < collection.size(); i++) {
-            itemStackHandler.insertItem(i, collection.get(i), false);
+            this.itemStackHandler.insertItem(i, collection.get(i), false);
         }
         this.pos = buf.readBlockPos();
     }

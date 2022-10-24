@@ -2,12 +2,15 @@ package com.brownbear85.onyxarcanix.items;
 
 import com.brownbear85.onyxarcanix.blocks.Chiselable;
 import com.brownbear85.onyxarcanix.init.BlockInit;
-import com.brownbear85.onyxarcanix.utility.ClientAccess;
+import com.brownbear85.onyxarcanix.runes.PlayerRunes;
+import com.brownbear85.onyxarcanix.util.KeyBindings;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.locale.Language;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -15,23 +18,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,11 +35,12 @@ public class OnyxChisel extends Item {
         super(properties);
     }
 
-    public static final String DEFAULT_RUNE = "e";
+    public static final String DEFAULT_RUNE = "b";
 
-    public static ItemStack cycleRune(ItemStack item, String[] arr) {
+    public static ItemStack cycleRune(ItemStack item, Player player) {
         CompoundTag tag = item.getOrCreateTag();
         String currentRune = tag.getString("rune");
+        String[] arr = player.getCapability(PlayerRunes.PLAYER_RUNES).resolve().get().getRunes();
 
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(currentRune)) {
@@ -70,9 +66,11 @@ public class OnyxChisel extends Item {
         Player player = context.getPlayer();
         Direction direction = context.getClickedFace() != Direction.UP && context.getClickedFace() != Direction.DOWN ? context.getClickedFace() : context.getHorizontalDirection().getOpposite();
 
-        stack.getOrCreateTag().putString("rune", DEFAULT_RUNE);
-
-        Chiselable.Runes rune = Chiselable.getRuneFromString(player.getItemInHand(hand).getOrCreateTag().getString("rune"));
+        String str = player.getItemInHand(hand).getOrCreateTag().getString("rune");
+        if (str.equals("")) {
+            stack.getOrCreateTag().putString("rune", DEFAULT_RUNE);
+        }
+        Chiselable.Runes rune = Chiselable.getRuneFromString(str);
 
         switch (state.getValue(Chiselable.CARVING_STATE)) {
             case 0:
@@ -107,6 +105,17 @@ public class OnyxChisel extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack,Level level, List<Component> components, TooltipFlag flag) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.chiselTooltip(components, stack));
+        if (stack.getOrCreateTag().getString("rune").equals("")) {
+            stack.getOrCreateTag().putString("rune", OnyxChisel.DEFAULT_RUNE);
+        }
+        components.add(
+                Component.translatable("chisel.onyxarcanix.currentRune",
+                Component.translatable("rune.onyxarcanix." + stack.getOrCreateTag().getString("rune")).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY)
+        );
+        components.add(
+                Component.translatable("chisel.onyxarcanix.description",
+                KeyBindings.CYCLE_RUNE.getKey().getDisplayName().copy().withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY)
+        );
+
     }
 }

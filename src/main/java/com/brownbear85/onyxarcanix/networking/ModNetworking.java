@@ -1,6 +1,7 @@
 package com.brownbear85.onyxarcanix.networking;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
+import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
 import com.brownbear85.onyxarcanix.networking.packets.ExampleC2SPacket;
 import com.brownbear85.onyxarcanix.networking.packets.ItemStackSyncC2SPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -38,6 +39,12 @@ public class ModNetworking {
                 .decoder(ItemStackSyncC2SPacket::new)
                 .encoder(ItemStackSyncC2SPacket::toBytes)
                 .consumerMainThread(ItemStackSyncC2SPacket::handle)
+                .add();
+
+        net.messageBuilder(ChiselCycleRuneC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ChiselCycleRuneC2SPacket::new)
+                .encoder(ChiselCycleRuneC2SPacket::toBytes)
+                .consumerMainThread(ChiselCycleRuneC2SPacket::handle)
                 .add();
     }
 

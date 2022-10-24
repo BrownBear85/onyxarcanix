@@ -1,7 +1,7 @@
 package com.brownbear85.onyxarcanix.blocks;
 
-import com.brownbear85.onyxarcanix.OnyxArcanix;
-import com.brownbear85.onyxarcanix.utility.ClientAccess;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -15,14 +15,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -49,7 +46,11 @@ public class Chiselable extends Block {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter blockGetter, List<Component> components, TooltipFlag flag) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.chiselableTooltip(components));
+        if (Screen.hasShiftDown()) {
+            components.add(Component.translatable("runed_block.onyxarcanix.description").withStyle(ChatFormatting.DARK_GRAY));
+        } else {
+            components.add(Component.translatable("runed_block.onyxarcanix.shift").withStyle(ChatFormatting.DARK_GRAY));
+        }
     }
 
     @Override
@@ -66,24 +67,6 @@ public class Chiselable extends Block {
             }
         }
         return Runes.BLANK;
-    }
-
-    public static final String[][] RUNE_NAME_TABLE = {
-            {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"},
-            {"air", "b", "c", "diamond", "earth", "the forest", "gold", "h", "iron", "golem", "llama", "the lake", "the mountains", "n", "obsidian", "the plains", "dolphin", "r", "silver", "tadpole", "u", "valley", "water", "axolotl", "magic", "fire"}
-    };
-
-    public static String getRuneName(String rune) {
-        for (int i = 0; i < RUNE_NAME_TABLE[0].length; i++) {
-            if (RUNE_NAME_TABLE[0][i].toLowerCase().equals(rune)) {
-                return RUNE_NAME_TABLE[1][i];
-            }
-        }
-        return "";
-    }
-
-    public static String getRuneName(Runes rune) {
-        return getRuneName(rune.toString());
     }
 
     public enum Runes implements StringRepresentable {
