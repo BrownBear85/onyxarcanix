@@ -1,4 +1,4 @@
-package com.brownbear85.onyxarcanix.init;
+package com.brownbear85.onyxarcanix.util;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;

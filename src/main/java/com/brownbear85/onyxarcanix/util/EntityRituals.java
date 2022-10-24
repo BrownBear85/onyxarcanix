@@ -1,4 +1,4 @@
-package com.brownbear85.onyxarcanix.utility;
+package com.brownbear85.onyxarcanix.util;
 
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import net.minecraft.sounds.SoundEvents;
