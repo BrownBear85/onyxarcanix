@@ -2,21 +2,19 @@ package com.brownbear85.onyxarcanix.events;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
 import com.brownbear85.onyxarcanix.blocks.entities.renderer.PedestalBlockEntityRenderer;
+import com.brownbear85.onyxarcanix.client.TextHudOverlay;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 
 import com.brownbear85.onyxarcanix.init.ItemInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
 import com.brownbear85.onyxarcanix.util.KeyBindings;
-import com.brownbear85.onyxarcanix.items.OnyxChisel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -32,6 +30,9 @@ public class ClientEvents {
                     ModNetworking.sendToServer(new ChiselCycleRuneC2SPacket(stack));
                 }
             }
+            if (KeyBindings.TEST.consumeClick()) {
+
+            }
         }
     }
 
@@ -40,12 +41,18 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBindings.CYCLE_RUNE);
+            event.register(KeyBindings.TEST);
         }
 
         @SubscribeEvent
         public static void registerRenders(final EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(BlockEntityInit.PEDESTAL.get(),
                     PedestalBlockEntityRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
+            event.registerAboveAll("chisel", TextHudOverlay.HUD_CHISEL);
         }
     }
 }

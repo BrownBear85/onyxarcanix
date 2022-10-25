@@ -3,7 +3,12 @@ package com.brownbear85.onyxarcanix.items;
 import com.brownbear85.onyxarcanix.OnyxArcanix;
 import com.brownbear85.onyxarcanix.init.ItemInit;
 import com.brownbear85.onyxarcanix.util.EntityRituals;
+import com.brownbear85.onyxarcanix.util.Ray;
 import com.brownbear85.onyxarcanix.util.WorldActions;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -15,6 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class RitualKnife extends SwordItem {
     public RitualKnife(Tier tier, int damage, float speed, Item.Properties properties) {
@@ -29,7 +35,6 @@ public class RitualKnife extends SwordItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-
         WorldActions.playSound(player, SoundEvents.FIRE_EXTINGUISH);
         WorldActions.playSound(player, SoundEvents.PLAYER_BURP);
 

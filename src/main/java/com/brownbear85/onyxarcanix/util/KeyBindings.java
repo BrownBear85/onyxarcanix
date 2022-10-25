@@ -8,6 +8,8 @@ import org.lwjgl.glfw.GLFW;
 public class KeyBindings {
     public static final String KEY_CATEGORY_ONYXARCANIX = "key.category.onyxarcanix.category";
     public static final String KEY_CYCLE_RUNE = "key.onyxarcanix.cycle_rune";
+    public static final String KEY_TEST = "key.onyxarcanix.cycle_test";
 
     public static final KeyMapping CYCLE_RUNE = new KeyMapping(KEY_CYCLE_RUNE, KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_PERIOD, KEY_CATEGORY_ONYXARCANIX);
+    public static final KeyMapping TEST = new KeyMapping(KEY_TEST, KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_COMMA, KEY_CATEGORY_ONYXARCANIX);
 }

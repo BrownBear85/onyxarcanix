@@ -27,6 +27,7 @@
   "rune.onyxarcanix.x": "axolotl",
   "rune.onyxarcanix.y": "magic",
   "rune.onyxarcanix.z": "fire",
+  "rune.onyxarcanix.blank": "No rune applied",
   "key.onyxarcanix.cycle_rune": "Cycle Selected Rune in Chisel",
   "key.category.onyxarcanix.category": "Onyx Arcanix",
   "itemGroup.onyxarcanix": "Onyx Arcanix",
@@ -42,9 +43,10 @@
   "death.attack.onyxApple.player": "%s spread their soul too thin whilst fighting %s",
   "death.attack.onyxApple": "%s spread their soul too thin",
   "color_codes": "https://htmlcolorcodes.com/minecraft-color-codes/",
-  "chisel.onyxarcanix.description": "Press %s to change selected rune",
-  "chisel.onyxarcanix.currentRune": "Selected Rune: Rune of %s",
+  "chisel.onyxarcanix.description": "Press \u00A77[%s\u00A77]\u00A78 to change selected rune",
+  "chisel.onyxarcanix.currentRune": "Selected Rune: \u00A77Rune of %s",
   "block.onyxarcanix.stone_pedestal": "Stone Pedestal",
   "block.onyxarcanix.runed_stone_bricks": "Blank Stone",
-  "block.onyxarcanix.onyx": "Onyx"
+  "block.onyxarcanix.onyx": "Onyx",
+  "gui.onyxarcanix.currentRune": "Rune of "
 }
