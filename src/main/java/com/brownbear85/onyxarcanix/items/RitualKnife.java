@@ -21,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ToolAction;
 
 public class RitualKnife extends SwordItem {
     public RitualKnife(Tier tier, int damage, float speed, Item.Properties properties) {
@@ -48,27 +49,13 @@ public class RitualKnife extends SwordItem {
     }
 
     @Override
-    public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        if (!entity.getType().equals(EntityType.ARMOR_STAND)) {
-            Level level = entity.getLevel();
-
-            if (entity.invulnerableTime == 0) {
-                entity.hurt(OnyxArcanix.playerSacrifice(player), 3.0F);
-                damageItem(player, stack);
-
-                WorldActions.playSound(entity, SoundEvents.FIRE_EXTINGUISH);
-                WorldActions.playSound(entity, SoundEvents.PLAYER_BURP);
-            }
-            if (entity instanceof LivingEntity livingEntity) {
-                float health = livingEntity.getHealth();
-                if (level.isClientSide() && health - 3.0F <= 0.0F || !level.isClientSide() && health <= 0.0F) {
-                    EntityRituals.doEntityDeathRitual(livingEntity);
-                }
-            }
-            return true;
-        } else {
-            return false;
+    public boolean hurtEnemy(ItemStack stack, LivingEntity victim, LivingEntity attacker) {
+        if (!victim.isAlive()) {
+            WorldActions.playSound(victim, SoundEvents.FIRE_EXTINGUISH);
+            WorldActions.playSound(victim, SoundEvents.PLAYER_BURP);
+            EntityRituals.doEntityDeathRitual(victim);
         }
+        return super.hurtEnemy(stack, victim, attacker);
     }
 
     @Override
