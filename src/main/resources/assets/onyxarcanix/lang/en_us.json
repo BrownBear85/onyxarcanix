@@ -48,5 +48,6 @@
   "block.onyxarcanix.stone_pedestal": "Stone Pedestal",
   "block.onyxarcanix.runed_stone_bricks": "Blank Stone",
   "block.onyxarcanix.onyx": "Onyx",
-  "gui.onyxarcanix.currentRune": "Rune of "
+  "gui.onyxarcanix.currentRune": "Rune of ",
+  "block.onyxarcanix.onyx_bricks": "Onyx Bricks"
 }

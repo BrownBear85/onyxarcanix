@@ -293,6 +293,6 @@ public final class AssetCreator {
     }
 
     public static void main(String[] args) throws IOException {
-        createBasicBlock("stone_pedestal", true);
+        createBasicBlock("onyx_bricks", true);
     }
 }

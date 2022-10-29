@@ -22,6 +22,9 @@ public class BlockInit {
     public static final RegistryObject<Block> ONYX_BLOCK = register("onyx",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(2.4F, 6.0F)), ItemInit.properties());
 
+    public static final RegistryObject<Block> ONYX_BRICKS = register("onyx_bricks",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(2.4F, 6.0F)), ItemInit.properties());
+
     public static final RegistryObject<Block> RUNED_STONE_BRICKS = register("runed_stone_bricks",
             () -> new Chiselable(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F)), ItemInit.properties());
 
