@@ -1,6 +1,7 @@
 package com.brownbear85.onyxarcanix.blocks.entities.renderer;
 
-import com.brownbear85.onyxarcanix.blocks.entities.PedestalBlockEntity;
+import com.brownbear85.onyxarcanix.blocks.BaseItemHolder;
+import com.brownbear85.onyxarcanix.blocks.entities.ItemHolderBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
@@ -16,8 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 
-public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
-    public PedestalBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+public class ItemHolderBlockEntityRenderer implements BlockEntityRenderer<ItemHolderBlockEntity> {
+    public ItemHolderBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
 
     }
 
@@ -30,18 +31,20 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
     }
 
     @Override
-    public void render(PedestalBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(ItemHolderBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
-        ItemStack stack = blockEntity.getRenderStack();
-        poseStack.pushPose();
-        poseStack.translate(0.5F, 1.5F + bobHeight(), 0.5F);
-        poseStack.scale(0.5F, 0.5F, 0.5F);
-        poseStack.mulPose(Vector3f.YP.rotation(rotation()));
+        if (blockEntity.getBlockState().getBlock() instanceof BaseItemHolder itemHolderBlock) {
+            ItemStack stack = blockEntity.getRenderStack();
+            poseStack.pushPose();
+            poseStack.translate(itemHolderBlock.itemX, itemHolderBlock.itemY + bobHeight(), itemHolderBlock.itemZ);
+            poseStack.scale(0.5F, 0.5F, 0.5F);
+            poseStack.mulPose(Vector3f.YP.rotation(rotation()));
 
-        itemRenderer.renderStatic(stack, ItemTransforms.TransformType.FIXED, getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos()),
-                OverlayTexture.NO_OVERLAY, poseStack, bufferSource, 1);
-        poseStack.popPose();
+            itemRenderer.renderStatic(stack, ItemTransforms.TransformType.FIXED, getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos()),
+                    OverlayTexture.NO_OVERLAY, poseStack, bufferSource, 1);
+            poseStack.popPose();
+        }
     }
 
     private int getLightLevel(Level level, BlockPos pos) {

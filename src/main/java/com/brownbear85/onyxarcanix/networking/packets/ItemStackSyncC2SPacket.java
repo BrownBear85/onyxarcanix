@@ -1,6 +1,6 @@
 package com.brownbear85.onyxarcanix.networking.packets;
 
-import com.brownbear85.onyxarcanix.blocks.entities.PedestalBlockEntity;
+import com.brownbear85.onyxarcanix.blocks.entities.ItemHolderBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -44,7 +44,7 @@ public class ItemStackSyncC2SPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof PedestalBlockEntity blockEntity) {
+            if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof ItemHolderBlockEntity blockEntity) {
                 blockEntity.setHandler(this.itemStackHandler);
             }
         });

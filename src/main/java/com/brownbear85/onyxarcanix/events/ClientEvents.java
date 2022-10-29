@@ -1,7 +1,7 @@
 package com.brownbear85.onyxarcanix.events;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
-import com.brownbear85.onyxarcanix.blocks.entities.renderer.PedestalBlockEntityRenderer;
+import com.brownbear85.onyxarcanix.blocks.entities.renderer.ItemHolderBlockEntityRenderer;
 import com.brownbear85.onyxarcanix.client.TextHudOverlay;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 
@@ -46,8 +46,8 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void registerRenders(final EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(BlockEntityInit.PEDESTAL.get(),
-                    PedestalBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(BlockEntityInit.ITEM_HOLDER_BLOCK_ENTITY.get(),
+                    ItemHolderBlockEntityRenderer::new);
         }
 
         @SubscribeEvent

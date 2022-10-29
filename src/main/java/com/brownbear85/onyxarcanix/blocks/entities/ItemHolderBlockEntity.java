@@ -22,12 +22,24 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PedestalBlockEntity extends BlockEntity {
-     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
+public class ItemHolderBlockEntity extends BlockEntity {
+    public ItemHolderBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockEntityInit.ITEM_HOLDER_BLOCK_ENTITY.get(), pos, state);
+    }
+
+    /*
+    public static void tick(Level level, BlockPos pos, BlockState state, ItemHolderBlockEntity entity) {
+
+    }
+     */
+
+    /* item management */
+
+    private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             if (!level.isClientSide())
-            ModNetworking.sendToClients(new ItemStackSyncC2SPacket(this, getBlockPos()));
+                ModNetworking.sendToClients(new ItemStackSyncC2SPacket(this, getBlockPos()));
         }
 
         @Override
@@ -36,33 +48,6 @@ public class PedestalBlockEntity extends BlockEntity {
         }
     };
     private final LazyOptional<IItemHandlerModifiable> optional = LazyOptional.of(() -> this.itemHandler);
-
-    public PedestalBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.PEDESTAL.get(), pos, state);
-    }
-
-    public ItemStack getRenderStack() {
-        return itemHandler.getStackInSlot(0);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag() {
-        return saveWithoutMetadata();
-    }
-
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    public void setHandler(ItemStackHandler itemStackHandler) {
-        for (int i = 0; i < itemStackHandler.getSlots(); i++) {
-            this.itemHandler.setStackInSlot(i, itemStackHandler.getStackInSlot(i));
-        }
-    }
-
-    public static void tick(Level level, BlockPos pos, BlockState state, PedestalBlockEntity entity) {
-
-    }
 
     public void dropItem() {
         ItemEntity itementity = new ItemEntity(this.level, (double)this.getBlockPos().getX() + 0.5D, (double)this.getBlockPos().getY() + 1.2D, (double)this.getBlockPos().getZ() + 0.5D, this.itemHandler.getStackInSlot(0));
@@ -95,6 +80,18 @@ public class PedestalBlockEntity extends BlockEntity {
         return itemHandler.getStackInSlot(0) != ItemStack.EMPTY;
     }
 
+    public ItemStack getRenderStack() {
+        return itemHandler.getStackInSlot(0);
+    }
+
+    public void setHandler(ItemStackHandler itemStackHandler) {
+        for (int i = 0; i < itemStackHandler.getSlots(); i++) {
+            this.itemHandler.setStackInSlot(i, itemStackHandler.getStackInSlot(i));
+        }
+    }
+
+    /* nbt */
+
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
@@ -115,5 +112,16 @@ public class PedestalBlockEntity extends BlockEntity {
     @Override
     public void invalidateCaps() {
         this.optional.invalidate();
+    }
+
+    /* these make the item still render when the chunk is loaded */
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return saveWithoutMetadata();
+    }
+
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

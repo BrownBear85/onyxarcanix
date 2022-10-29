@@ -26,7 +26,7 @@ public class BlockInit {
             () -> new Chiselable(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F)), ItemInit.properties());
 
     public static final RegistryObject<Block> STONE_PEDESTAL = register("stone_pedestal",
-            () -> new Pedestal(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion()), ItemInit.properties());
+            () -> new Pedestal(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion(), 0.5F, 1.5F, 0.5F), ItemInit.properties());
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier, Item.Properties properties) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);
