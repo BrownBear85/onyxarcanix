@@ -2,15 +2,13 @@ package com.brownbear85.onyxarcanix.items;
 
 import com.brownbear85.onyxarcanix.blocks.Chiselable;
 import com.brownbear85.onyxarcanix.init.BlockInit;
-import com.brownbear85.onyxarcanix.runes.PlayerRunes;
+import com.brownbear85.onyxarcanix.capabilities.PlayerRunes;
 import com.brownbear85.onyxarcanix.util.KeyBindings;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.locale.Language;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;

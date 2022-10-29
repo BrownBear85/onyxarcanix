@@ -1,4 +1,4 @@
-package com.brownbear85.onyxarcanix.runes;
+package com.brownbear85.onyxarcanix.capabilities;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.brownbear85.onyxarcanix.runes.PlayerRunes.PLAYER_RUNES;
+import static com.brownbear85.onyxarcanix.capabilities.PlayerRunes.PLAYER_RUNES;
 
 public class PlayerRunesProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
 

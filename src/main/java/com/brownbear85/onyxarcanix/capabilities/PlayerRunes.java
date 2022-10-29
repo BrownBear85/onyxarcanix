@@ -1,4 +1,4 @@
-package com.brownbear85.onyxarcanix.runes;
+package com.brownbear85.onyxarcanix.capabilities;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
