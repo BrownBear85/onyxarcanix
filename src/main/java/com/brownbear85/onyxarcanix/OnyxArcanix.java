@@ -4,7 +4,8 @@ import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ItemInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
-import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +16,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,5 +44,12 @@ public class OnyxArcanix {
         public @NotNull ItemStack makeIcon() {
             return ItemInit.RITUAL_KNIFE.get().getDefaultInstance();
         }
+
+//        @Override
+//        public void fillItemList(NonNullList<ItemStack> list) {
+//            list.add(new ItemStack(Items.COOKED_BEEF, 34));
+//        }
     };
+
+
 }

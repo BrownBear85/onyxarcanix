@@ -393,6 +393,131 @@ public final class AssetCreator {
                   }
                 }
                 """;
+        public static final String wallBlockStateTemplate = """
+                {
+                  "multipart": [
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_post"
+                      },
+                      "when": {
+                        "up": "true"
+                      }
+                    },
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_side",
+                        "uvlock": true
+                      },
+                      "when": {
+                        "north": "low"
+                      }
+                    },
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_side",
+                        "uvlock": true,
+                        "y": 90
+                      },
+                      "when": {
+                        "east": "low"
+                      }
+                    },
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_side",
+                        "uvlock": true,
+                        "y": 180
+                      },
+                      "when": {
+                        "south": "low"
+                      }
+                    },
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_side",
+                        "uvlock": true,
+                        "y": 270
+                      },
+                      "when": {
+                        "west": "low"
+                      }
+                    },
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_side_tall",
+                        "uvlock": true
+                      },
+                      "when": {
+                        "north": "tall"
+                      }
+                    },
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_side_tall",
+                        "uvlock": true,
+                        "y": 90
+                      },
+                      "when": {
+                        "east": "tall"
+                      }
+                    },
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_side_tall",
+                        "uvlock": true,
+                        "y": 180
+                      },
+                      "when": {
+                        "south": "tall"
+                      }
+                    },
+                    {
+                      "apply": {
+                        "model": "onyxarcanix:block/%s_side_tall",
+                        "uvlock": true,
+                        "y": 270
+                      },
+                      "when": {
+                        "west": "tall"
+                      }
+                    }
+                  ]
+                }
+                """;
+        public static final String wallInventoryModelTemplate = """
+                {
+                  "parent": "minecraft:block/wall_inventory",
+                  "textures": {
+                    "wall": "onyxarcanix:block/%s"
+                  }
+                }
+                """;
+        public static final String wallPostModelTemplate = """
+                {
+                  "parent": "minecraft:block/template_wall_post",
+                  "textures": {
+                    "wall": "onyxarcanix:block/%s"
+                  }
+                }
+                """;
+        public static final String wallSideModelTemplate = """
+                {
+                  "parent": "minecraft:block/template_wall_side",
+                  "textures": {
+                    "wall": "onyxarcanix:block/%s"
+                  }
+                }
+                """;
+        public static final String wallSideTallModelTemplate = """
+                {
+                  "parent": "minecraft:block/template_wall_side_tall",
+                  "textures": {
+                    "wall": "onyxarcanix:block/%s"
+                  }
+                }
+                """;
+
     }
 
     private static final String[] alphabet = new String[] {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
@@ -528,6 +653,90 @@ public final class AssetCreator {
     }
 
 
+    private static void createWallBlockState(String name) {
+        try {
+            File blockstate = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\blockstates\\" + name + ".json");
+            if (blockstate.createNewFile()) {
+                FileWriter writer = new FileWriter(blockstate);
+                writer.write(replace(Templates.wallBlockStateTemplate, "%s", name));
+                writer.close();
+                System.out.println("Created blockstates\\" + name);
+            } else {
+                System.out.println("File blockstates\\" + name + " already exists, skipping it");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred whilst creating blockstates\\" + name);
+        }
+    }
+
+    private static void createWallInventoryModel(String name, String texture) {
+        try {
+            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
+            if (blockModel.createNewFile()) {
+                FileWriter writer = new FileWriter(blockModel);
+                writer.write(String.format(Templates.wallInventoryModelTemplate, texture));
+                writer.close();
+                System.out.println("Created models\\block\\" + name);
+            } else {
+                System.out.println("File models\\block\\" + name + " already exists, skipping it");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred whilst creating models\\block\\" + name);
+        }
+    }
+
+    private static void createWallPostModel(String name, String texture) {
+        name = name + "_post";
+        try {
+            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
+            if (blockModel.createNewFile()) {
+                FileWriter writer = new FileWriter(blockModel);
+                writer.write(String.format(Templates.wallPostModelTemplate, texture));
+                writer.close();
+                System.out.println("Created models\\block\\" + name);
+            } else {
+                System.out.println("File models\\block\\" + name + " already exists, skipping it");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred whilst creating models\\block\\" + name);
+        }
+    }
+
+    private static void createWallSideModel(String name, String texture) {
+        name = name + "_side";
+        try {
+            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
+            if (blockModel.createNewFile()) {
+                FileWriter writer = new FileWriter(blockModel);
+                writer.write(String.format(Templates.wallSideModelTemplate, texture));
+                writer.close();
+                System.out.println("Created models\\block\\" + name);
+            } else {
+                System.out.println("File models\\block\\" + name + " already exists, skipping it");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred whilst creating models\\block\\" + name);
+        }
+    }
+
+    private static void createWallSideTallModel(String name, String texture) {
+        name = name + "_side_tall";
+        try {
+            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
+            if (blockModel.createNewFile()) {
+                FileWriter writer = new FileWriter(blockModel);
+                writer.write(String.format(Templates.wallSideTallModelTemplate, texture));
+                writer.close();
+                System.out.println("Created models\\block\\" + name);
+            } else {
+                System.out.println("File models\\block\\" + name + " already exists, skipping it");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred whilst creating models\\block\\" + name);
+        }
+    }
+
+
     private static void createSlabBlockState(String name, String base) {
         try {
             File blockstate = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\blockstates\\" + name + ".json");
@@ -646,7 +855,7 @@ public final class AssetCreator {
             FileWriter writer = new FileWriter(file);
             writer.write(lang);
             writer.close();
-            System.out.println("Adding " + key + " to lang");
+            System.out.println("Added " + key + " to lang");
         } catch (Exception e) {
             System.out.println("An error occurred whilst adding " + key + " to lang");
         }
@@ -654,36 +863,17 @@ public final class AssetCreator {
 
     /* block/item creation methods */
 
-    public static void createBasicBlock(String name, boolean item) {
+    public static void createBasicBlock(String name) {
         createBasicBlockState(name);
         createBasicBlockModel(name);
         createBasicBlockLootTable(name);
+        createBasicBlockitemModel(name);
         addToLang("block.onyxarcanix." + name, idToName(name));
-        if (item) createBasicBlockitemModel(name);
     }
 
     public static void createBasicItem(String name) {
         createBasicItemModel(name);
         addToLang("item.onyxarcanix." + name, idToName(name));
-    }
-
-    public static void createStairBlock(String name, String texture) {
-        createStairBlockState(name);
-        createStairBasicModel(name, texture);
-        createStairInnerModel(name, texture);
-        createStairOuterModel(name, texture);
-        createBasicBlockLootTable(name);
-        addToLang("block.onyxarcanix." + name, idToName(name));
-        createBasicBlockitemModel(name);
-    }
-
-    public static void createSlabBlock(String name, String texture) {
-        createSlabBlockState(name, texture);
-        createSlabBasicModel(name, texture);
-        createSlabTopModel(name, texture);
-        createBasicBlockLootTable(name);
-        addToLang("block.onyxarcanix." + name, idToName(name));
-        createBasicBlockitemModel(name);
     }
 
     public static void createRunedBlock(String name) {
@@ -704,8 +894,38 @@ public final class AssetCreator {
         }
     }
 
+    public static void createStairBlock(String name, String texture) {
+        createStairBlockState(name);
+        createStairBasicModel(name, texture);
+        createStairInnerModel(name, texture);
+        createStairOuterModel(name, texture);
+        createBasicBlockLootTable(name);
+        createBasicBlockitemModel(name);
+        addToLang("block.onyxarcanix." + name, idToName(name));
+    }
+
+    public static void createSlabBlock(String name, String texture) {
+        createSlabBlockState(name, texture);
+        createSlabBasicModel(name, texture);
+        createSlabTopModel(name, texture);
+        createBasicBlockLootTable(name);
+        createBasicBlockitemModel(name);
+        addToLang("block.onyxarcanix." + name, idToName(name));
+    }
+
+    public static void createWallBlock(String name, String texture) {
+        createWallBlockState(name);
+        createWallInventoryModel(name, texture);
+        createWallPostModel(name, texture);
+        createWallSideModel(name, texture);
+        createWallSideTallModel(name, texture);
+        createBasicBlockLootTable(name);
+        createBasicBlockitemModel(name);
+        addToLang("block.onyxarcanix." + name, idToName(name));
+    }
+
     public static void main(String[] args) {
-        createSlabBlock("onyx_slab", "onyx");
-        createSlabBlock("onyx_brick_slab", "onyx_bricks");
+        createWallBlock("onyx_wall", "onyx");
+        createWallBlock("onyx_brick_wall", "onyx_bricks");
     }
 }

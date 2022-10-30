@@ -54,5 +54,7 @@
   "block.onyxarcanix.onyx_stairs": "Onyx Stairs",
   "block.onyxarcanix.chiseled_onyx": "Chiseled Onyx",
   "block.onyxarcanix.onyx_slab": "Onyx Slab",
-  "block.onyxarcanix.onyx_brick_slab": "Onyx Brick Slab"
+  "block.onyxarcanix.onyx_brick_slab": "Onyx Brick Slab",
+  "block.onyxarcanix.onyx_wall": "Onyx Wall",
+  "block.onyxarcanix.onyx_brick_wall": "Onyx Brick Wall"
 }

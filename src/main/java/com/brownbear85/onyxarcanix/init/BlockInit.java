@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -34,6 +35,9 @@ public class BlockInit {
     public static final RegistryObject<Block> ONYX_SLAB = register("onyx_slab",
             () -> new SlabBlock(ONYX_PROPERTIES), ItemInit.properties());
 
+    public static final RegistryObject<Block> ONYX_WALL = register("onyx_wall",
+            () -> new WallBlock(ONYX_PROPERTIES), ItemInit.properties());
+
 
 
     public static final RegistryObject<Block> ONYX_BRICKS = register("onyx_bricks",
@@ -44,6 +48,9 @@ public class BlockInit {
 
     public static final RegistryObject<Block> ONYX_BRICK_SLAB = register("onyx_brick_slab",
             () -> new SlabBlock(ONYX_PROPERTIES), ItemInit.properties());
+
+    public static final RegistryObject<Block> ONYX_BRICK_WALL = register("onyx_brick_wall",
+            () -> new WallBlock(ONYX_PROPERTIES), ItemInit.properties());
 
 
 

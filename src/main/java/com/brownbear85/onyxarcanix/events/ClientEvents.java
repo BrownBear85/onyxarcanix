@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientEvents {
+
     @Mod.EventBusSubscriber(modid = OnyxArcanix.MODID, value = Dist.CLIENT)
     public static class ClientForgeEvents {
         @SubscribeEvent
@@ -31,11 +32,11 @@ public class ClientEvents {
                     ModNetworking.sendToServer(new ChiselCycleRuneC2SPacket(stack));
                 }
             }
-            if (KeyBindings.TEST.consumeClick()) {
-
-            }
         }
+    }
 
+    @Mod.EventBusSubscriber(modid = OnyxArcanix.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModNetworking.register();
