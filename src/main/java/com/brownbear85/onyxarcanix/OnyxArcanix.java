@@ -32,17 +32,11 @@ public class OnyxArcanix {
     public OnyxArcanix() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        bus.addListener(this::commonSetup);
-
         MinecraftForge.EVENT_BUS.register(this);
 
         BlockInit.BLOCKS.register(bus);
         ItemInit.ITEMS.register(bus);
         BlockEntityInit.BLOCK_ENTITIES.register(bus);
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
-
     }
 
     public static final CreativeModeTab TAB = new CreativeModeTab(MODID) {
