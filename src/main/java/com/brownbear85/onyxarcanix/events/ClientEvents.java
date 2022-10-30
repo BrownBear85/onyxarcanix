@@ -17,6 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientEvents {
     @Mod.EventBusSubscriber(modid = OnyxArcanix.MODID, value = Dist.CLIENT)
@@ -33,6 +34,11 @@ public class ClientEvents {
             if (KeyBindings.TEST.consumeClick()) {
 
             }
+        }
+
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            ModNetworking.register();
         }
     }
 

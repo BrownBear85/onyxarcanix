@@ -6,6 +6,7 @@ import com.brownbear85.onyxarcanix.blocks.Pedestal;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -30,12 +31,20 @@ public class BlockInit {
     public static final RegistryObject<Block> ONYX_STAIRS = register("onyx_stairs",
             () -> new StairBlock(() -> ONYX_BLOCK.get().defaultBlockState(), ONYX_PROPERTIES), ItemInit.properties());
 
+    public static final RegistryObject<Block> ONYX_SLAB = register("onyx_slab",
+            () -> new SlabBlock(ONYX_PROPERTIES), ItemInit.properties());
+
+
 
     public static final RegistryObject<Block> ONYX_BRICKS = register("onyx_bricks",
             () -> new Block(ONYX_PROPERTIES), ItemInit.properties());
 
     public static final RegistryObject<Block> ONYX_BRICK_STAIRS = register("onyx_brick_stairs",
             () -> new StairBlock(() -> ONYX_BRICKS.get().defaultBlockState(), ONYX_PROPERTIES), ItemInit.properties());
+
+    public static final RegistryObject<Block> ONYX_BRICK_SLAB = register("onyx_brick_slab",
+            () -> new SlabBlock(ONYX_PROPERTIES), ItemInit.properties());
+
 
 
     public static final RegistryObject<Block> CHISELED_ONYX = register("chiseled_onyx",

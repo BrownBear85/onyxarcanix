@@ -51,12 +51,4 @@ public class OnyxArcanix {
             return ItemInit.RITUAL_KNIFE.get().getDefaultInstance();
         }
     };
-
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            ModNetworking.register();
-        }
-    }
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "onyxarcanix:block/onyx_brick_slab"
+    },
+    "type=double": {
+      "model": "onyxarcanix:block/onyx_bricks"
+    },
+    "type=top": {
+      "model": "onyxarcanix:block/onyx_brick_slab_top"
+    }
+  }
+}
