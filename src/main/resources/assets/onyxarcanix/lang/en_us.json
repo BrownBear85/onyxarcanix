@@ -49,5 +49,8 @@
   "block.onyxarcanix.runed_stone_bricks": "Blank Stone",
   "block.onyxarcanix.onyx": "Onyx",
   "gui.onyxarcanix.currentRune": "Rune of ",
-  "block.onyxarcanix.onyx_bricks": "Onyx Bricks"
+  "block.onyxarcanix.onyx_bricks": "Onyx Bricks",
+  "block.onyxarcanix.onyx_brick_stairs": "Onyx Brick Stairs",
+  "block.onyxarcanix.onyx_stairs": "Onyx Stairs",
+  "block.onyxarcanix.chiseled_onyx": "Chiseled Onyx"
 }

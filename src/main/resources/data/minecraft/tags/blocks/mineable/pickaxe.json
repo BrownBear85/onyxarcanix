@@ -2,8 +2,16 @@
   "replace": false,
   "values": [
     "onyxarcanix:onyx",
+    "onyxarcanix:onyx_stairs",
+    "onyxarcanix:onyx_slab",
+    "onyxarcanix:onyx_wall",
+
+    "onyxarcanix:onyx_bricks",
+    "onyxarcanix:onyx_brick_stairs",
+    "onyxarcanix:onyx_brick_slab",
+    "onyxarcanix:onyx_brick_wall",
+
     "onyxarcanix:runed_stone_bricks",
     "onyxarcanix:stone_pedestal",
-    "onyxarcanix:onyx_bricks"
   ]
 }

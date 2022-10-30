@@ -6,6 +6,7 @@ import com.brownbear85.onyxarcanix.blocks.Pedestal;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -19,11 +20,28 @@ public class BlockInit {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, OnyxArcanix.MODID);
 
+    private static final BlockBehaviour.Properties ONYX_PROPERTIES = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(2.4F, 6.0F);
+
+    /* deco blocks */
+
     public static final RegistryObject<Block> ONYX_BLOCK = register("onyx",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(2.4F, 6.0F)), ItemInit.properties());
+            () -> new Block(ONYX_PROPERTIES), ItemInit.properties());
+
+    public static final RegistryObject<Block> ONYX_STAIRS = register("onyx_stairs",
+            () -> new StairBlock(() -> ONYX_BLOCK.get().defaultBlockState(), ONYX_PROPERTIES), ItemInit.properties());
+
 
     public static final RegistryObject<Block> ONYX_BRICKS = register("onyx_bricks",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(2.4F, 6.0F)), ItemInit.properties());
+            () -> new Block(ONYX_PROPERTIES), ItemInit.properties());
+
+    public static final RegistryObject<Block> ONYX_BRICK_STAIRS = register("onyx_brick_stairs",
+            () -> new StairBlock(() -> ONYX_BRICKS.get().defaultBlockState(), ONYX_PROPERTIES), ItemInit.properties());
+
+
+    public static final RegistryObject<Block> CHISELED_ONYX = register("chiseled_onyx",
+            () -> new Block(ONYX_PROPERTIES), ItemInit.properties());
+
+    /* special blocks */
 
     public static final RegistryObject<Block> RUNED_STONE_BRICKS = register("runed_stone_bricks",
             () -> new Chiselable(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F)), ItemInit.properties());
