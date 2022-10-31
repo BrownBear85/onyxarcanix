@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public final class AssetCreator {
     public static class Templates {
-        public static final String blockstateTemplate = """
+        public static final String basicBlockstate = """
                 {
                   "variants": {
                     "": {
@@ -15,26 +15,26 @@ public final class AssetCreator {
                     }
                   }
                 }""";
-        public static final String blockModelTemplate = """
+        public static final String basicBlockModel = """
                 {
                   "parent": "minecraft:block/cube_all",
                   "textures": {
                     "all": "onyxarcanix:block/%s"
                   }
                 }""";
-        public static final String blockitemModelTemplate = """
+        public static final String basicBlockItemModel = """
                 {
                   "parent": "onyxarcanix:block/%s"
                 }
                 """;
-        public static final String itemModelTemplate = """
+        public static final String basicItemModel = """
                 {
                   "parent": "minecraft:item/generated",
                   "textures": {
                     "layer0": "onyxarcanix:item/%s"
                   }
                 }""";
-        public static final String blockLootTableTemplate = """
+        public static final String basicBlockLootTable = """
                 {
                   "type": "minecraft:block",
                   "pools": [
@@ -51,7 +51,8 @@ public final class AssetCreator {
                 }
                             
                 """;
-        public static final String runedBlockModelTemplate = """
+        // TODO: needs to be updated to work with any name, also change particle
+        public static final String runedBlockModel = """
                 {
                     "credit": "Made with Blockbench",
                     "texture_size": [64, 64],
@@ -77,7 +78,7 @@ public final class AssetCreator {
                     ]
                  }
                 """;
-        public static final String stairBlockStateTemplate = """
+        public static final String stairBlockstate = """
                 {
                   "variants": {
                     "facing=east,half=bottom,shape=inner_left": {
@@ -328,7 +329,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String stairModelTemplate = """
+        public static final String stairModel = """
                 {
                   "parent": "minecraft:block/stairs",
                   "textures": {
@@ -338,7 +339,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String stairInnerModelTemplate = """
+        public static final String stairInnerModel = """
                 {
                   "parent": "minecraft:block/inner_stairs",
                   "textures": {
@@ -348,7 +349,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String stairOuterModelTemplate = """
+        public static final String stairOuterModel = """
                 {
                   "parent": "minecraft:block/outer_stairs",
                   "textures": {
@@ -358,7 +359,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String slabBlockStateTemplate = """
+        public static final String slabBlockstate = """
                 {
                   "variants": {
                     "type=bottom": {
@@ -373,7 +374,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String slabModelTemplate = """
+        public static final String slabModel = """
                 {
                   "parent": "minecraft:block/slab",
                   "textures": {
@@ -383,7 +384,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String slabTopModelTemplate = """
+        public static final String slabTopModel = """
                 {
                   "parent": "minecraft:block/slab_top",
                   "textures": {
@@ -393,7 +394,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String wallBlockStateTemplate = """
+        public static final String wallBlockstate = """
                 {
                   "multipart": [
                     {
@@ -485,7 +486,7 @@ public final class AssetCreator {
                   ]
                 }
                 """;
-        public static final String wallInventoryModelTemplate = """
+        public static final String wallInventoryModel = """
                 {
                   "parent": "minecraft:block/wall_inventory",
                   "textures": {
@@ -493,7 +494,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String wallPostModelTemplate = """
+        public static final String wallPostModel = """
                 {
                   "parent": "minecraft:block/template_wall_post",
                   "textures": {
@@ -501,7 +502,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String wallSideModelTemplate = """
+        public static final String wallSideModel = """
                 {
                   "parent": "minecraft:block/template_wall_side",
                   "textures": {
@@ -509,7 +510,7 @@ public final class AssetCreator {
                   }
                 }
                 """;
-        public static final String wallSideTallModelTemplate = """
+        public static final String wallSideTallModel = """
                 {
                   "parent": "minecraft:block/template_wall_side_tall",
                   "textures": {
@@ -523,6 +524,22 @@ public final class AssetCreator {
     private static final String[] alphabet = new String[] {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
 
     /* util methods */
+
+    public static void createJSON(String path, String name, String contents) {
+        try {
+            File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\" + path + "\\" + name + ".json");
+            if (file.createNewFile()) {
+                FileWriter writer = new FileWriter(file);
+                writer.write(contents);
+                writer.close();
+                System.out.println("Created " + path + "\\" + name);
+            } else {
+                System.out.println("Skipped " + path + "\\" + name + " | file already exists");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred whilst creating " + path + "\\" + name);
+        }
+    }
 
     public static String replace(String str, String replace, String newStr) {
         StringBuilder builder = new StringBuilder();
@@ -540,7 +557,7 @@ public final class AssetCreator {
         return builder.toString();
     }
 
-    private static String idToName(String id) {
+    public static String idToName(String id) {
         String[] arr = id.replace("_", " ").split("\\s");
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
@@ -554,287 +571,82 @@ public final class AssetCreator {
     /* file creation methods */
 
     private static void createBasicBlockState(String name) {
-        try {
-            File blockstate = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\blockstates\\" + name + ".json");
-            if (blockstate.createNewFile()) {
-                FileWriter writer = new FileWriter(blockstate);
-                writer.write(String.format(Templates.blockstateTemplate, name));
-                writer.close();
-                System.out.println("Created blockstates\\" + name);
-            } else {
-                System.out.println("File blockstates\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating blockstates\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\blockstates", name, String.format(Templates.basicBlockstate, name));
     }
 
     private static void createBasicBlockModel(String name) {
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(String.format(Templates.blockModelTemplate, name));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, String.format(Templates.basicBlockModel, name));
     }
 
 
     private static void createStairBlockState(String name) {
-        try {
-            File blockstate = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\blockstates\\" + name + ".json");
-            if (blockstate.createNewFile()) {
-                FileWriter writer = new FileWriter(blockstate);
-                writer.write(replace(Templates.stairBlockStateTemplate, "%s", name));
-                writer.close();
-                System.out.println("Created blockstates\\" + name);
-            } else {
-                System.out.println("File blockstates\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating blockstates\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\blockstates", name, replace(Templates.stairBlockstate, "%s", name));
     }
 
     private static void createStairBasicModel(String name, String texture) {
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(replace(Templates.stairModelTemplate, "%s", texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, replace(Templates.stairModel, "%s", texture));
     }
 
     private static void createStairInnerModel(String name, String texture) {
         name = name + "_inner";
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(replace(Templates.stairInnerModelTemplate, "%s", texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, replace(Templates.stairInnerModel, "%s", texture));
     }
 
     private static void createStairOuterModel(String name, String texture) {
         name = name + "_outer";
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(replace(Templates.stairOuterModelTemplate, "%s", texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, replace(Templates.stairOuterModel, "%s", texture));
     }
 
 
     private static void createWallBlockState(String name) {
-        try {
-            File blockstate = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\blockstates\\" + name + ".json");
-            if (blockstate.createNewFile()) {
-                FileWriter writer = new FileWriter(blockstate);
-                writer.write(replace(Templates.wallBlockStateTemplate, "%s", name));
-                writer.close();
-                System.out.println("Created blockstates\\" + name);
-            } else {
-                System.out.println("File blockstates\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating blockstates\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\blockstates", name, replace(Templates.wallBlockstate, "%s", name));
     }
 
     private static void createWallInventoryModel(String name, String texture) {
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(String.format(Templates.wallInventoryModelTemplate, texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, String.format(Templates.wallInventoryModel, texture));
     }
 
     private static void createWallPostModel(String name, String texture) {
         name = name + "_post";
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(String.format(Templates.wallPostModelTemplate, texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, String.format(Templates.wallPostModel, texture));
     }
 
     private static void createWallSideModel(String name, String texture) {
         name = name + "_side";
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(String.format(Templates.wallSideModelTemplate, texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, String.format(Templates.wallSideModel, texture));
     }
 
     private static void createWallSideTallModel(String name, String texture) {
         name = name + "_side_tall";
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(String.format(Templates.wallSideTallModelTemplate, texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, String.format(Templates.wallSideTallModel, texture));
     }
 
 
     private static void createSlabBlockState(String name, String base) {
-        try {
-            File blockstate = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\blockstates\\" + name + ".json");
-            if (blockstate.createNewFile()) {
-                FileWriter writer = new FileWriter(blockstate);
-                writer.write(String.format(Templates.slabBlockStateTemplate, name, base, name));
-                writer.close();
-                System.out.println("Created blockstates\\" + name);
-            } else {
-                System.out.println("File blockstates\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating blockstates\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, String.format(Templates.slabBlockstate, name, base, name));
     }
 
     private static void createSlabBasicModel(String name, String texture) {
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(replace(Templates.slabModelTemplate, "%s", texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, replace(Templates.slabModel, "%s", texture));
     }
 
     private static void createSlabTopModel(String name, String texture) {
         name = name + "_top";
-        try {
-            File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\" + name + ".json");
-            if (blockModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockModel);
-                writer.write(replace(Templates.slabTopModelTemplate, "%s", texture));
-                writer.close();
-                System.out.println("Created models\\block\\" + name);
-            } else {
-                System.out.println("File models\\block\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\block\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\block", name, replace(Templates.slabTopModel, "%s", texture));
     }
 
 
     private static void createBasicBlockitemModel(String name) {
-        try {
-            File blockitemModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\item\\" + name + ".json");
-            if (blockitemModel.createNewFile()) {
-                FileWriter writer = new FileWriter(blockitemModel);
-                writer.write(String.format(Templates.blockitemModelTemplate, name));
-                writer.close();
-                System.out.println("Created models\\item\\" + name);
-            } else {
-                System.out.println("File models\\item\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\item\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\item", name, String.format(Templates.basicBlockItemModel, name));
     }
 
     private static void createBasicItemModel(String name) {
-        try {
-            File itemModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\item\\" + name + ".json");
-            if (itemModel.createNewFile()) {
-                FileWriter writer = new FileWriter(itemModel);
-                writer.write(String.format(Templates.itemModelTemplate, name));
-                writer.close();
-                System.out.println("Created models\\item\\" + name);
-            } else {
-                System.out.println("File models\\item\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating models\\item\\" + name);
-        }
+        createJSON("assets\\onyxarcanix\\models\\item", name, String.format(Templates.basicItemModel, name));
     }
 
     private static void createBasicBlockLootTable(String name) {
-        try {
-            File blockstate = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\data\\onyxarcanix\\loot_tables\\blocks\\" + name + ".json");
-            if (blockstate.createNewFile()) {
-                FileWriter writer = new FileWriter(blockstate);
-                writer.write(String.format(Templates.blockLootTableTemplate, name));
-                writer.close();
-                System.out.println("Created loot_tables\\blocks\\" + name);
-            } else {
-                System.out.println("File loot_tables\\blocks\\" + name + " already exists, skipping it");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred whilst creating loot_tables\\blocks\\" + name);
-        }
+        createJSON("data\\onyxarcanix\\loot_tables\\blocks", name, String.format(Templates.basicBlockLootTable, name));
     }
-
 
     private static void addToLang(String key, String value) {
         try {
@@ -846,18 +658,48 @@ public final class AssetCreator {
                 data = scanner.nextLine();
                 builder.append(data).append("\n");
             }
+
             String lang = builder.toString().split("}")[0];
             if (lang.contains(key)) {
                 System.out.println("Key " + key + " already exists in lang, skipping it");
                 return;
             }
+
             lang = lang.substring(0, lang.length() - 1) + String.format(",%n  \"%s\": \"%s\"%n}", key, value);
             FileWriter writer = new FileWriter(file);
             writer.write(lang);
             writer.close();
+
             System.out.println("Added " + key + " to lang");
         } catch (Exception e) {
             System.out.println("An error occurred whilst adding " + key + " to lang");
+        }
+    }
+
+    private static void addToTag(String path, String tag, String item) {
+        try {
+            File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\data\\" + path + "\\" + tag + ".json");
+            Scanner scanner = new Scanner(file);
+            StringBuilder builder = new StringBuilder();
+            String data;
+            while (scanner.hasNextLine()) {
+                data = scanner.nextLine();
+                builder.append(data).append("\n");
+            }
+
+            String lang = builder.toString().split("]")[0];
+            if (lang.contains(item)) {
+                System.out.println("Item " + item + " is already in tag " + tag);
+            } else {
+                lang = lang.substring(0, lang.length() - 3) + String.format(",%n    \"%s\"%n  ]%n}", item);
+                FileWriter writer = new FileWriter(file);
+                writer.write(lang);
+                writer.close();
+                System.out.println("Added " + item + " to tag " + tag);
+            }
+
+        } catch (Exception e) {
+            System.out.println("An error occurred whilst adding " + item + " to tag " + tag);
         }
     }
 
@@ -882,7 +724,7 @@ public final class AssetCreator {
                 File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\runed_" + name + "\\rune_" + s + ".json");
                 if (blockModel.createNewFile()) {
                     FileWriter writer = new FileWriter(blockModel);
-                    writer.write(String.format(Templates.runedBlockModelTemplate, s));
+                    writer.write(String.format(Templates.runedBlockModel, s));
                     writer.close();
                     System.out.println("Created models\\block\\runed_\" + name + \"\\rune_" + s);
                 } else {
@@ -921,11 +763,11 @@ public final class AssetCreator {
         createWallSideTallModel(name, texture);
         createBasicBlockLootTable(name);
         createBasicBlockitemModel(name);
+        addToTag("minecraft\\tags\\blocks", "walls", "onyxarcanix:" + name);
         addToLang("block.onyxarcanix." + name, idToName(name));
     }
 
     public static void main(String[] args) {
-        createWallBlock("onyx_wall", "onyx");
-        createWallBlock("onyx_brick_wall", "onyx_bricks");
+
     }
 }
