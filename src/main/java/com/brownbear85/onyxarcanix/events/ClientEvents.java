@@ -23,6 +23,7 @@ public class ClientEvents {
 
     @Mod.EventBusSubscriber(modid = OnyxArcanix.MODID, value = Dist.CLIENT)
     public static class ClientForgeEvents {
+
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if (KeyBindings.CYCLE_RUNE.consumeClick()) {
@@ -37,6 +38,7 @@ public class ClientEvents {
 
     @Mod.EventBusSubscriber(modid = OnyxArcanix.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents {
+
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModNetworking.register();
@@ -45,6 +47,7 @@ public class ClientEvents {
 
     @Mod.EventBusSubscriber(modid = OnyxArcanix.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModBusEvents {
+
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBindings.CYCLE_RUNE);

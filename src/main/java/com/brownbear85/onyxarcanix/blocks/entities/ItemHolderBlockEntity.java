@@ -27,12 +27,6 @@ public class ItemHolderBlockEntity extends BlockEntity {
         super(BlockEntityInit.ITEM_HOLDER_BLOCK_ENTITY.get(), pos, state);
     }
 
-    /*
-    public static void tick(Level level, BlockPos pos, BlockState state, ItemHolderBlockEntity entity) {
-
-    }
-     */
-
     /* item management */
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {

@@ -1,6 +1,6 @@
 package com.brownbear85.onyxarcanix.client;
 
-import com.brownbear85.onyxarcanix.blocks.Chiselable;
+import com.brownbear85.onyxarcanix.blocks.ChiselableBlock;
 import com.brownbear85.onyxarcanix.init.ItemInit;
 import com.brownbear85.onyxarcanix.util.Ray;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -29,9 +29,9 @@ public class TextHudOverlay {
 
         Ray ray = new Ray(player);
         BlockState state = ray.cast(player.getReachDistance(), 0.5).getState();
-        if (state.getBlock() instanceof Chiselable) {
-            Chiselable.Runes rune = state.getValue(Chiselable.RUNE);
-            if (rune == Chiselable.Runes.BLANK) {
+        if (state.getBlock() instanceof ChiselableBlock) {
+            ChiselableBlock.Runes rune = state.getValue(ChiselableBlock.RUNE);
+            if (rune == ChiselableBlock.Runes.BLANK) {
                 font.drawShadow(new PoseStack(),
                         Component.translatable("rune.onyxarcanix.blank").withStyle(ChatFormatting.DARK_GRAY),
                  width * 0.5F + 6.5F, height * 0.5F - 10.0F, 0);

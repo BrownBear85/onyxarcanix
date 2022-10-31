@@ -1,6 +1,6 @@
 package com.brownbear85.onyxarcanix.items;
 
-import com.brownbear85.onyxarcanix.blocks.Chiselable;
+import com.brownbear85.onyxarcanix.blocks.ChiselableBlock;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.capabilities.PlayerRunes;
 import com.brownbear85.onyxarcanix.util.KeyBindings;
@@ -55,7 +55,7 @@ public class OnyxChisel extends Item {
         BlockState state = level.getBlockState(pos);
 
         if (!state.is(BlockInit.RUNED_STONE_BRICKS.get())) {return InteractionResult.FAIL;}
-        if (!Objects.equals(state.getValue(Chiselable.RUNE).getSerializedName(), "blank")) {return InteractionResult.FAIL;}
+        if (!Objects.equals(state.getValue(ChiselableBlock.RUNE).getSerializedName(), "blank")) {return InteractionResult.FAIL;}
 
         InteractionHand hand = context.getHand();
         if (hand == InteractionHand.OFF_HAND) {return InteractionResult.FAIL;}
@@ -68,9 +68,9 @@ public class OnyxChisel extends Item {
         if (str.equals("")) {
             stack.getOrCreateTag().putString("rune", DEFAULT_RUNE);
         }
-        Chiselable.Runes rune = Chiselable.getRuneFromString(str);
+        ChiselableBlock.Runes rune = ChiselableBlock.getRuneFromString(str);
 
-        switch (state.getValue(Chiselable.CARVING_STATE)) {
+        switch (state.getValue(ChiselableBlock.CARVING_STATE)) {
             case 0:
             case 1:
             case 2:
@@ -83,7 +83,7 @@ public class OnyxChisel extends Item {
                 player.getCooldowns().addCooldown(this, 10);
                 level.scheduleTick(pos, state.getBlock(), 5);
                 stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(context.getHand()));
-                level.setBlock(pos, state.setValue(Chiselable.CARVING_STATE, state.getValue(Chiselable.CARVING_STATE) + 1), 3);
+                level.setBlock(pos, state.setValue(ChiselableBlock.CARVING_STATE, state.getValue(ChiselableBlock.CARVING_STATE) + 1), 3);
                 return InteractionResult.SUCCESS;
 
             case 5:
@@ -93,7 +93,7 @@ public class OnyxChisel extends Item {
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1.0F, 1.0F);
                 player.getCooldowns().addCooldown(this, 40);
                 stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(context.getHand()));
-                level.setBlock(pos, state.setValue(Chiselable.CARVING_STATE, 0).setValue(Chiselable.RUNE, rune), 3);
+                level.setBlock(pos, state.setValue(ChiselableBlock.CARVING_STATE, 0).setValue(ChiselableBlock.RUNE, rune), 3);
                 return InteractionResult.SUCCESS;
 
             default:

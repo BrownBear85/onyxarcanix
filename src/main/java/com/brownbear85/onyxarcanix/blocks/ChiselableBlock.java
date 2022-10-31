@@ -24,11 +24,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Chiselable extends Block {
+public class ChiselableBlock extends Block {
     public static final EnumProperty<Runes> RUNE = EnumProperty.create("rune", Runes.class);
     public static final IntegerProperty CARVING_STATE = IntegerProperty.create("carving_state", 0, 5);
 
-    public Chiselable(Properties properties) {
+    public ChiselableBlock(Properties properties) {
         super(properties);
     }
 

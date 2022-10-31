@@ -11,8 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -22,37 +20,14 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class BaseItemHolder extends BaseEntityBlock {
+public class BaseItemHolderBlock extends BaseEntityBlock {
     public float itemX, itemY, itemZ;
 
-    public BaseItemHolder(BlockBehaviour.Properties properties, float itemX, float itemY, float itemZ) {
+    public BaseItemHolderBlock(BlockBehaviour.Properties properties, float itemX, float itemY, float itemZ) {
         super(properties);
         this.itemX = itemX;
         this.itemY = itemY;
         this.itemZ = itemZ;
-    }
-
-    /* voxel shape */
-
-    private static final VoxelShape SHAPE = makeShape();
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext collisionContext) {
-        return SHAPE;
-    }
-
-    public static VoxelShape makeShape() {
-        VoxelShape shape = Shapes.empty();
-        shape = Shapes.join(shape, Shapes.box(0.0625, 0, 0.0625, 0.9375, 0.25, 0.9375), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.1875, 0.25, 0.1875, 0.8125, 0.875, 0.8125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.125, 0.875, 0.125, 0.875, 1, 0.875), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.25, 1, 0.25, 0.75, 1.0625, 0.75), BooleanOp.OR);
-        return shape;
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState p_49232_) {
-        return RenderShape.MODEL;
     }
 
     /* override methods */

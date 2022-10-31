@@ -768,6 +768,6 @@ public final class AssetCreator {
     }
 
     public static void main(String[] args) {
-
+        createBasicBlock("altar");
     }
 }

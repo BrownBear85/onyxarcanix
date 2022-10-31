@@ -1,8 +1,9 @@
 package com.brownbear85.onyxarcanix.init;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
-import com.brownbear85.onyxarcanix.blocks.Chiselable;
-import com.brownbear85.onyxarcanix.blocks.Pedestal;
+import com.brownbear85.onyxarcanix.blocks.AltarBlock;
+import com.brownbear85.onyxarcanix.blocks.ChiselableBlock;
+import com.brownbear85.onyxarcanix.blocks.PedestalBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -60,10 +61,15 @@ public class BlockInit {
     /* special blocks */
 
     public static final RegistryObject<Block> RUNED_STONE_BRICKS = register("runed_stone_bricks",
-            () -> new Chiselable(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F)), ItemInit.properties());
+            () -> new ChiselableBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F)), ItemInit.properties());
 
     public static final RegistryObject<Block> STONE_PEDESTAL = register("stone_pedestal",
-            () -> new Pedestal(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion(), 0.5F, 1.5F, 0.5F), ItemInit.properties());
+            () -> new PedestalBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion(), 0.5F, 1.5F, 0.5F), ItemInit.properties());
+
+    public static final RegistryObject<Block> ALTAR = register("altar",
+            () -> new AltarBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion(), 0.5F, 1.0F, 0.5F), ItemInit.properties());
+
+
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier, Item.Properties properties) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);

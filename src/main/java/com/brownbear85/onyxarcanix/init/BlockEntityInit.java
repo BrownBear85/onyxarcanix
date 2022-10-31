@@ -12,6 +12,6 @@ public class BlockEntityInit {
 
     public static final RegistryObject<BlockEntityType<ItemHolderBlockEntity>> ITEM_HOLDER_BLOCK_ENTITY = BLOCK_ENTITIES.register("pedestal",
             () -> BlockEntityType.Builder.of(ItemHolderBlockEntity::new,
-    /* blocks */ BlockInit.STONE_PEDESTAL.get()
+    /* blocks */ BlockInit.STONE_PEDESTAL.get(), BlockInit.ALTAR.get()
             ).build(null));
 }

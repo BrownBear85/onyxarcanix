@@ -1,6 +1,6 @@
 package com.brownbear85.onyxarcanix.blocks.entities.renderer;
 
-import com.brownbear85.onyxarcanix.blocks.BaseItemHolder;
+import com.brownbear85.onyxarcanix.blocks.BaseItemHolderBlock;
 import com.brownbear85.onyxarcanix.blocks.entities.ItemHolderBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -34,7 +34,7 @@ public class ItemHolderBlockEntityRenderer implements BlockEntityRenderer<ItemHo
     public void render(ItemHolderBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
-        if (blockEntity.getBlockState().getBlock() instanceof BaseItemHolder itemHolderBlock) {
+        if (blockEntity.getBlockState().getBlock() instanceof BaseItemHolderBlock itemHolderBlock) {
             ItemStack stack = blockEntity.getRenderStack();
             poseStack.pushPose();
             poseStack.translate(itemHolderBlock.itemX, itemHolderBlock.itemY + bobHeight(), itemHolderBlock.itemZ);
