@@ -1,6 +1,5 @@
 package com.brownbear85.onyxarcanix.blocks;
 
-import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -17,7 +16,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class AltarBlock extends BaseItemHolderBlock {
+public class AltarBlock extends ItemHolderBlock {
     public AltarBlock(Properties properties, float itemX, float itemY, float itemZ) {
         super(properties, itemX, itemY, itemZ);
     }

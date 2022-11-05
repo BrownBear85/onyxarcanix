@@ -1,8 +1,6 @@
 package com.brownbear85.onyxarcanix.blocks;
 
 import com.brownbear85.onyxarcanix.blocks.entities.ItemHolderBlockEntity;
-import com.brownbear85.onyxarcanix.init.BlockEntityInit;
-import com.brownbear85.onyxarcanix.init.BlockInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,13 +14,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class BaseItemHolderBlock extends BaseEntityBlock {
+public class ItemHolderBlock extends BaseEntityBlock {
     public float itemX, itemY, itemZ;
 
     public BlockEntityType<?> type = null;
     public String testString = null;
 
-    public BaseItemHolderBlock(BlockBehaviour.Properties properties, float itemX, float itemY, float itemZ) {
+    public ItemHolderBlock(BlockBehaviour.Properties properties, float itemX, float itemY, float itemZ) {
         super(properties);
         this.itemX = itemX;
         this.itemY = itemY;

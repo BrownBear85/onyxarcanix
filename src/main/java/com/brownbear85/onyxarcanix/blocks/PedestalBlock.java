@@ -11,7 +11,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class PedestalBlock extends BaseItemHolderBlock {
+public class PedestalBlock extends ItemHolderBlock {
     public PedestalBlock(Properties properties, float itemX, float itemY, float itemZ) {
         super(properties, itemX, itemY, itemZ);
     }

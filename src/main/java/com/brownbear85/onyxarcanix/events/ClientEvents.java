@@ -1,7 +1,7 @@
 package com.brownbear85.onyxarcanix.events;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
-import com.brownbear85.onyxarcanix.blocks.BaseItemHolderBlock;
+import com.brownbear85.onyxarcanix.blocks.ItemHolderBlock;
 import com.brownbear85.onyxarcanix.blocks.entities.renderer.ItemHolderBlockEntityRenderer;
 import com.brownbear85.onyxarcanix.client.TextHudOverlay;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
@@ -21,7 +21,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 
 public class ClientEvents {
 
@@ -49,8 +48,8 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void onClientSetup(FMLCommonSetupEvent event) {
-            ((BaseItemHolderBlock) BlockInit.STONE_PEDESTAL.get()).type = BlockEntityInit.PEDESTAL_BLOCK_ENTITY.get();
-            ((BaseItemHolderBlock) BlockInit.ALTAR.get()).type = BlockEntityInit.ALTAR_BLOCK_ENTITY.get();
+            ((ItemHolderBlock) BlockInit.STONE_PEDESTAL.get()).type = BlockEntityInit.PEDESTAL_BLOCK_ENTITY.get();
+            ((ItemHolderBlock) BlockInit.ALTAR.get()).type = BlockEntityInit.ALTAR_BLOCK_ENTITY.get();
         }
     }
 
