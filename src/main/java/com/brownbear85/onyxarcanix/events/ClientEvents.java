@@ -1,10 +1,12 @@
 package com.brownbear85.onyxarcanix.events;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
+import com.brownbear85.onyxarcanix.blocks.BaseItemHolderBlock;
 import com.brownbear85.onyxarcanix.blocks.entities.renderer.ItemHolderBlockEntityRenderer;
 import com.brownbear85.onyxarcanix.client.TextHudOverlay;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 
+import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ItemInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
@@ -18,6 +20,8 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 
 public class ClientEvents {
 
@@ -38,10 +42,15 @@ public class ClientEvents {
 
     @Mod.EventBusSubscriber(modid = OnyxArcanix.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents {
-
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModNetworking.register();
+        }
+
+        @SubscribeEvent
+        public static void onClientSetup(FMLCommonSetupEvent event) {
+            ((BaseItemHolderBlock) BlockInit.STONE_PEDESTAL.get()).type = BlockEntityInit.PEDESTAL_BLOCK_ENTITY.get();
+            ((BaseItemHolderBlock) BlockInit.ALTAR.get()).type = BlockEntityInit.ALTAR_BLOCK_ENTITY.get();
         }
     }
 
@@ -56,7 +65,9 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void registerRenders(final EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(BlockEntityInit.ITEM_HOLDER_BLOCK_ENTITY.get(),
+            event.registerBlockEntityRenderer(BlockEntityInit.PEDESTAL_BLOCK_ENTITY.get(),
+                    ItemHolderBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(BlockEntityInit.ALTAR_BLOCK_ENTITY.get(),
                     ItemHolderBlockEntityRenderer::new);
         }
 

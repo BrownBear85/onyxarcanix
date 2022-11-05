@@ -11,8 +11,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -23,8 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemHolderBlockEntity extends BlockEntity {
-    public ItemHolderBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.ITEM_HOLDER_BLOCK_ENTITY.get(), pos, state);
+    public ItemHolderBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     /* item management */
@@ -43,6 +43,7 @@ public class ItemHolderBlockEntity extends BlockEntity {
     };
     private final LazyOptional<IItemHandlerModifiable> optional = LazyOptional.of(() -> this.itemHandler);
 
+    // TODO make this use the set item offsets instead of the values for pedestal
     public void dropItem() {
         ItemEntity itementity = new ItemEntity(this.level, (double)this.getBlockPos().getX() + 0.5D, (double)this.getBlockPos().getY() + 1.2D, (double)this.getBlockPos().getZ() + 0.5D, this.itemHandler.getStackInSlot(0));
         itementity.setDeltaMovement(this.level.random.nextDouble() * 0.02D, 0.05D, this.level.random.nextDouble() * 0.02D);

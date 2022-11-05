@@ -1,5 +1,6 @@
 package com.brownbear85.onyxarcanix.blocks;
 
+import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
