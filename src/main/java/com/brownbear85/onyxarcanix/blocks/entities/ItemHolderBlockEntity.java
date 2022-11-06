@@ -45,6 +45,7 @@ public class ItemHolderBlockEntity extends BlockEntity {
 
     // TODO make this use the set item offsets instead of the values for pedestal
     public void dropItem() {
+        if (!this.hasItem()) return;
         ItemEntity itementity = new ItemEntity(this.level, (double)this.getBlockPos().getX() + 0.5D, (double)this.getBlockPos().getY() + 1.2D, (double)this.getBlockPos().getZ() + 0.5D, this.itemHandler.getStackInSlot(0));
         itementity.setDeltaMovement(this.level.random.nextDouble() * 0.02D, 0.05D, this.level.random.nextDouble() * 0.02D);
         this.level.addFreshEntity(itementity);

@@ -1,5 +1,7 @@
 package com.brownbear85.onyxarcanix.blocks;
 
+import com.brownbear85.onyxarcanix.blocks.entities.AltarBlockEntity;
+import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -9,12 +11,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class AltarBlock extends ItemHolderBlock {
     public AltarBlock(Properties properties, float itemX, float itemY, float itemZ) {
@@ -48,9 +54,10 @@ public class AltarBlock extends ItemHolderBlock {
 
     /* override methods */
 
+    @Nullable
     @Override
-    public void tick(BlockState state, ServerLevel serverLevel, BlockPos pos, RandomSource random) {
-        super.tick(state, serverLevel, pos, random);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(type, BlockEntityInit.ALTAR_BLOCK_ENTITY.get(), AltarBlockEntity::tick);
     }
 
     @Override
