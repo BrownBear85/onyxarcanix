@@ -55,7 +55,7 @@ public class BlockInit {
 
 
 
-    public static final RegistryObject<Block> CHISELED_ONYX = register("chiseled_onyx",
+    public static final RegistryObject<Block> CHISELED_ONYX = register("chiseled_onyx_bricks",
             () -> new Block(ONYX_PROPERTIES), ItemInit.properties());
 
     /* special blocks */

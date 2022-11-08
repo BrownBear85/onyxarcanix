@@ -3,6 +3,8 @@ package com.brownbear85.onyxarcanix;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
+import java.util.Map;
 import java.util.Scanner;
 
 public final class AssetCreator {
@@ -541,20 +543,28 @@ public final class AssetCreator {
         }
     }
 
-    public static String replace(String str, String replace, String newStr) {
-        StringBuilder builder = new StringBuilder();
+    public static String replace(String str, String target, String replace) {
+        StringBuilder wordBuilder = new StringBuilder();
+        StringBuilder correctWordBuilder = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
-            for (int ch = 0; ch < replace.length(); ch++) {
-                if (str.charAt(i + ch) != replace.charAt(ch)) {
-                    builder.append(str.charAt(i + ch));
+            for (int ch = 0; ch < target.length(); ch++) {
+                if (str.charAt(i + ch) == target.charAt(ch)) {
+                    correctWordBuilder.append(str.charAt(i + ch));
+                    if (ch + 1 == target.length()) {
+                        wordBuilder.append(replace);
+                        correctWordBuilder.delete(0, correctWordBuilder.length());
+                        i += target.length() - 1;
+                    }
+                } else {
+                    correctWordBuilder.append(str.charAt(i + ch));
+                    wordBuilder.append(correctWordBuilder);
+                    i += correctWordBuilder.length() - 1;
+                    correctWordBuilder.delete(0, correctWordBuilder.length());
                     break;
-                } else if (ch + 1 == replace.length()) {
-                    builder.append(newStr);
-                    i += replace.length() - 1;
                 }
             }
         }
-        return builder.toString();
+        return wordBuilder.toString();
     }
 
     public static String idToName(String id) {
@@ -705,6 +715,28 @@ public final class AssetCreator {
 
     /* block/item creation methods */
 
+    public static void cloneRecipe(String recipe, String[][] strings, String name) {
+        try {
+            File file = new File("C:\\Users\\Connor Wright\\Desktop\\Files\\minecraft assets\\data\\minecraft\\recipes\\" + recipe + ".json");
+            Scanner scanner = new Scanner(file);
+            StringBuilder builder = new StringBuilder();
+            String data;
+            while (scanner.hasNextLine()) {
+                data = scanner.nextLine();
+                builder.append(data).append("\n");
+            }
+
+            String newRecipe = builder.toString();
+            for (int i = 0; i < strings[0].length; i++) {
+                newRecipe = replace(newRecipe, strings[0][i], strings[1][i]);
+            }
+
+            createJSON("data\\onyxarcanix\\recipes\\", name, newRecipe);
+        } catch (Exception e) {
+            System.out.println("An error occurred while cloning recipe " + name);
+        }
+    }
+
     public static void createBasicBlock(String name) {
         createBasicBlockState(name);
         createBasicBlockModel(name);
@@ -768,6 +800,6 @@ public final class AssetCreator {
     }
 
     public static void main(String[] args) {
-        createBasicBlock("altar");
+//        cloneRecipe("chiseled_stone_bricks", new String[][] {{"minecraft:stone", "minecraft:chiseled_stone_bricks"},{"onyxarcanix:onyx", "onyxarcanix:chiseled_onyx_bricks"}}, "chiseled_onyx_bricks");
     }
 }

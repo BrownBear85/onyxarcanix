@@ -61,6 +61,10 @@ public class ItemHolderBlockEntity extends BlockEntity {
         }
     }
 
+    public void setItem(ItemStack stack) {
+        itemHandler.setStackInSlot(0, stack);
+    }
+
     public void removeItem(Player player, InteractionHand hand) {
         if (!this.level.isClientSide()) {
             ItemStack stack = itemHandler.extractItem(0, 1, false);
@@ -86,7 +90,7 @@ public class ItemHolderBlockEntity extends BlockEntity {
         }
     }
 
-    /* nbt */
+    /* nbt TODO: figure out how to set nbt on placement and save nbt on breaking (for altar type, should still drop item on breaking */
 
     @Override
     public void load(CompoundTag nbt) {

@@ -4,6 +4,7 @@ import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ItemInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
+import com.brownbear85.onyxarcanix.recipe.RecipeInit;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
@@ -37,6 +38,7 @@ public class OnyxArcanix {
         BlockInit.BLOCKS.register(bus);
         ItemInit.ITEMS.register(bus);
         BlockEntityInit.BLOCK_ENTITIES.register(bus);
+        RecipeInit.register(bus);
     }
 
     public static final CreativeModeTab TAB = new CreativeModeTab(MODID) {

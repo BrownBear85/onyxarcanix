@@ -5,11 +5,14 @@ import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -23,6 +26,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class AltarBlock extends ItemHolderBlock {
+    //public static final EnumProperty<AltarBlock.Types> TYPE = EnumProperty.create("type", AltarBlock.Types.class);
+
     public AltarBlock(Properties properties, float itemX, float itemY, float itemZ) {
         super(properties, itemX, itemY, itemZ);
     }
@@ -64,4 +69,35 @@ public class AltarBlock extends ItemHolderBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         return super.use(state, level, pos, player, hand, result);
     }
+
+    /* blockstates */
+
+//    @Override
+//    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+//        builder.add(TYPE);
+//    }
+//
+//    @Nullable
+//    @Override
+//    public BlockState getStateForPlacement(BlockPlaceContext context) {
+//        return super.getStateForPlacement(context).setValue(TYPE, Types.STONE);
+//    }
+//
+//    public enum Types implements StringRepresentable {
+//        STONE("stone"), ONYX("onyx");
+//
+//        private final String name;
+//
+//        Types(String name) {
+//            this.name = name;
+//        }
+//
+//        public String toString() {
+//            return this.name;
+//        }
+//
+//        public String getSerializedName() {
+//            return this.name;
+//        }
+//    }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "onyxarcanix:block/chiseled_onyx"
+    "all": "onyxarcanix:block/chiseled_onyx_bricks"
   }
 }
