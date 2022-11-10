@@ -4,9 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class Ray {
     private Level level;
@@ -43,19 +47,23 @@ public class Ray {
             this.oldPos = pos;
             this.pos = new Vec3(this.pos.x + this.angle.x * step, this.pos.y + this.angle.y * step, this.pos.z + this.angle.z * step);
 
-            if (!this.getBlockState().isAir()) {
+            if (hitBlock()) {
                 this.pos = this.oldPos;
                 double preciseStep = step * 0.1;
                 for (double e = 0.0D; e < distance; e += preciseStep) {
                     this.pos = new Vec3(this.pos.x + this.angle.x * preciseStep, this.pos.y + this.angle.y * preciseStep, this.pos.z + this.angle.z * preciseStep);
 
-                    if (!this.getBlockState().isAir()) {
+                    if (hitBlock()) {
                         return new RayCastResult(true, this.pos, this.getBlockState());
                     }
                 }
             }
         }
         return new RayCastResult(false, this.pos, this.getBlockState());
+    }
+
+    private boolean hitBlock() {
+        return !this.getBlockState().isAir();
     }
 
     public class RayCastResult {

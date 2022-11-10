@@ -1,5 +1,7 @@
 package com.brownbear85.onyxarcanix.blocks.entities;
 
+import com.brownbear85.onyxarcanix.blocks.AltarBlock;
+import com.brownbear85.onyxarcanix.blocks.ChiselableBlock;
 import com.brownbear85.onyxarcanix.blocks.PedestalBlock;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.recipe.AltarRecipe;
@@ -10,7 +12,9 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 
+import java.util.Locale;
 import java.util.Optional;
 
 public class AltarBlockEntity extends ItemHolderBlockEntity {
@@ -21,9 +25,10 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
 
     public AltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.ALTAR_BLOCK_ENTITY.get(), pos, state);
+        this.type = state.getValue(AltarBlock.TYPE).toString().toLowerCase();
     }
 
-    public String type = "cheese"; // pull from blockstate
+    public String type; // pull from blockstate
 
     /* recipe management */
 
@@ -42,7 +47,7 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
 
     public Optional<AltarRecipe> getRecipe() {
         refreshItems();
-        return level.getRecipeManager().getRecipeFor(AltarRecipe.Type.INSTANCE, new SimpleContainer(this.getRenderStack(), northItem, southItem, eastItem, westItem), level);
+        return level.getRecipeManager().getRecipeFor(AltarRecipe.Type.INSTANCE, new SimpleContainer(this.getRenderStack(), northItem, southItem, westItem, eastItem), level);
     }
 
     public void refreshBlocks() {
@@ -55,10 +60,10 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
 
     public void refreshItems() {
         if (isValid()) {
-            northItem = getItem(Direction.NORTH);
-            southItem = getItem(Direction.SOUTH);
-            eastItem = getItem(Direction.EAST);
-            westItem = getItem(Direction.WEST);
+            northItem = getPedestalItem(Direction.NORTH);
+            southItem = getPedestalItem(Direction.SOUTH);
+            eastItem = getPedestalItem(Direction.EAST);
+            westItem = getPedestalItem(Direction.WEST);
         }
     }
 
@@ -81,7 +86,7 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
         return level.getBlockEntity(this.getBlockPos().offset(direction.getNormal().multiply(PEDESTAL_DISTANCE)), BlockEntityInit.PEDESTAL_BLOCK_ENTITY.get()).get();
     }
 
-    public ItemStack getItem(Direction direction) {
+    public ItemStack getPedestalItem(Direction direction) {
         return getPedestal(direction).getRenderStack();
     }
 
@@ -90,6 +95,8 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     }
 
     /* blockstates */
+
+
 
     /* nbt */
 

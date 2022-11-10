@@ -3,8 +3,6 @@ package com.brownbear85.onyxarcanix.blocks;
 import com.brownbear85.onyxarcanix.blocks.entities.AltarBlockEntity;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,6 +16,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -26,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class AltarBlock extends ItemHolderBlock {
-    //public static final EnumProperty<AltarBlock.Types> TYPE = EnumProperty.create("type", AltarBlock.Types.class);
+    public static final EnumProperty<AltarBlock.Types> TYPE = EnumProperty.create("type", AltarBlock.Types.class);
 
     public AltarBlock(Properties properties, float itemX, float itemY, float itemZ) {
         super(properties, itemX, itemY, itemZ);
@@ -59,6 +59,11 @@ public class AltarBlock extends ItemHolderBlock {
 
     /* override methods */
 
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
@@ -72,32 +77,32 @@ public class AltarBlock extends ItemHolderBlock {
 
     /* blockstates */
 
-//    @Override
-//    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-//        builder.add(TYPE);
-//    }
-//
-//    @Nullable
-//    @Override
-//    public BlockState getStateForPlacement(BlockPlaceContext context) {
-//        return super.getStateForPlacement(context).setValue(TYPE, Types.STONE);
-//    }
-//
-//    public enum Types implements StringRepresentable {
-//        STONE("stone"), ONYX("onyx");
-//
-//        private final String name;
-//
-//        Types(String name) {
-//            this.name = name;
-//        }
-//
-//        public String toString() {
-//            return this.name;
-//        }
-//
-//        public String getSerializedName() {
-//            return this.name;
-//        }
-//    }
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(TYPE);
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return super.getStateForPlacement(context).setValue(TYPE, Types.STONE);
+    }
+
+    public enum Types implements StringRepresentable {
+        STONE("stone"), ONYX("onyx");
+
+        private final String name;
+
+        Types(String name) {
+            this.name = name;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+
+        public String getSerializedName() {
+            return this.name;
+        }
+    }
 }

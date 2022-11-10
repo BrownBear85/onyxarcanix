@@ -13,8 +13,6 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-
 public class AltarRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
@@ -31,12 +29,27 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
         if (pLevel.isClientSide()) {
             return false;
         }
-
-        return recipeItems.get(0).test(pContainer.getItem(0)) &&
+        boolean rot0 = recipeItems.get(0).test(pContainer.getItem(0)) &&
                 recipeItems.get(1).test(pContainer.getItem(1)) &&
                 recipeItems.get(2).test(pContainer.getItem(2)) &&
                 recipeItems.get(3).test(pContainer.getItem(3)) &&
                 recipeItems.get(4).test(pContainer.getItem(4));
+        boolean rot90 = recipeItems.get(0).test(pContainer.getItem(0)) &&
+                recipeItems.get(1).test(pContainer.getItem(4)) &&
+                recipeItems.get(2).test(pContainer.getItem(3)) &&
+                recipeItems.get(3).test(pContainer.getItem(1)) &&
+                recipeItems.get(4).test(pContainer.getItem(2));
+        boolean rot180 = recipeItems.get(0).test(pContainer.getItem(0)) &&
+                recipeItems.get(1).test(pContainer.getItem(2)) &&
+                recipeItems.get(2).test(pContainer.getItem(1)) &&
+                recipeItems.get(3).test(pContainer.getItem(4)) &&
+                recipeItems.get(4).test(pContainer.getItem(3));
+        boolean rot270 = recipeItems.get(0).test(pContainer.getItem(0)) &&
+                recipeItems.get(1).test(pContainer.getItem(3)) &&
+                recipeItems.get(2).test(pContainer.getItem(4)) &&
+                recipeItems.get(3).test(pContainer.getItem(2)) &&
+                recipeItems.get(4).test(pContainer.getItem(1));
+        return rot0 || rot90 || rot180 || rot270;
     }
 
     @Override

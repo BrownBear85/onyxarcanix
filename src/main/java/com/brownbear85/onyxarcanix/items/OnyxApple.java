@@ -37,6 +37,4 @@ public class OnyxApple extends Item {
     public SoundEvent getEatingSound() {
         return SoundEvents.AMBIENT_CAVE;
     }
-
-
 }

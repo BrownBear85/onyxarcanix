@@ -5,16 +5,16 @@
       "item": "minecraft:emerald"
     },
     {
-      "item": "minecraft:dirt"
+      "item": "minecraft:redstone"
     },
     {
-      "item": "minecraft:dirt"
+      "item": "minecraft:lapis_lazuli"
     },
     {
-      "item": "minecraft:dirt"
+      "item": "minecraft:chicken"
     },
     {
-      "item": "minecraft:dirt"
+      "item": "minecraft:bone"
     }
   ],
   "output": {

@@ -6,10 +6,37 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "onyxarcanix:altar"
+          "name": "onyxarcanix:altar",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{type:\"stone\"}",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "onyxarcanix:altar",
+                  "properties": {
+                    "type": "stone"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{type:\"onyx\"}",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "onyxarcanix:altar",
+                  "properties": {
+                    "type": "onyx"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     }
   ]
 }
-
