@@ -1,0 +1,24 @@
+{
+  "type": "onyxarcanix:altar_crafting",
+  "altar": "STONE",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "onyxarcanix:onyx"
+    },
+    {
+      "item": "onyxarcanix:onyx"
+    },
+    {
+      "item": "onyxarcanix:onyx"
+    },
+    {
+      "item": "onyxarcanix:onyx"
+    }
+  ],
+  "output": {
+    "item": "onyxarcanix:onyx_iron"
+  }
+}

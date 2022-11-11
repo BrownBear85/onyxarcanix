@@ -10,7 +10,7 @@ import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ItemInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
-import com.brownbear85.onyxarcanix.util.KeyBindings;
+import com.brownbear85.onyxarcanix.client.KeyBindings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;

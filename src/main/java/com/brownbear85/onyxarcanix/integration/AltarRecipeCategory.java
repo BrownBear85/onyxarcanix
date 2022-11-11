@@ -1,12 +1,14 @@
 package com.brownbear85.onyxarcanix.integration;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
+import com.brownbear85.onyxarcanix.blocks.entities.AltarBlockEntity;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.recipe.AltarRecipe;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -22,16 +24,18 @@ public class AltarRecipeCategory implements IRecipeCategory<AltarRecipe> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(OnyxArcanix.MODID, "textures/gui/altar_crafting_gui.png");
 
     private final IDrawable background;
-    private final IDrawable altar;
-    private final IDrawable pedestal;
+    private final IDrawable stone_altar;
+    private final IDrawable onyx_altar;
+    private final IDrawable stone_pedestal;
 
     private final IGuiHelper helper;
 
     public AltarRecipeCategory(IGuiHelper helper) {
         this.helper = helper;
         this.background = helper.createDrawable(TEXTURE, 0, 0, 100, 100);
-        this.altar = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockInit.ALTAR.get()));
-        this.pedestal = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockInit.STONE_PEDESTAL.get()));
+        this.stone_altar = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockInit.ALTAR.get()));
+        this.onyx_altar = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockInit.ONYX_ALTAR.get()));
+        this.stone_pedestal = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockInit.STONE_PEDESTAL.get()));
     }
 
     @Override
@@ -51,11 +55,19 @@ public class AltarRecipeCategory implements IRecipeCategory<AltarRecipe> {
 
     @Override
     public IDrawable getIcon() {
-        return this.altar;
+        return this.onyx_altar;
     }
 
     @Override
     public void draw(AltarRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+        IDrawable altar, pedestal;
+        if (recipe.getAltar() == AltarBlockEntity.Type.STONE) {
+            altar = stone_altar;
+            pedestal = stone_pedestal;
+        } else {
+            altar = onyx_altar;
+            pedestal = stone_pedestal;
+        }
         altar.draw(stack, 42, 44);
         pedestal.draw(stack, 42, 14);
         pedestal.draw(stack, 42, 74);

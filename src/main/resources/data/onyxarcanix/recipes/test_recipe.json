@@ -1,5 +1,6 @@
 {
   "type": "onyxarcanix:altar_crafting",
+  "altar": "ONYX",
   "ingredients": [
     {
       "item": "minecraft:emerald"

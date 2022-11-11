@@ -1,6 +1,7 @@
 package com.brownbear85.onyxarcanix.recipe;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
+import com.brownbear85.onyxarcanix.blocks.entities.AltarBlockEntity;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -17,11 +18,13 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
+    private final AltarBlockEntity.Type altar;
 
-    public AltarRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) {
+    public AltarRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, AltarBlockEntity.Type altar) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
+        this.altar = altar;
     }
 
     @Override
@@ -50,6 +53,10 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
                 recipeItems.get(3).test(pContainer.getItem(2)) &&
                 recipeItems.get(4).test(pContainer.getItem(1));
         return rot0 || rot90 || rot180 || rot270;
+    }
+
+    public AltarBlockEntity.Type getAltar() {
+        return altar;
     }
 
     @Override
@@ -100,6 +107,7 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
         @Override
         public AltarRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
+            AltarBlockEntity.Type altar = AltarBlockEntity.Type.valueOf(pSerializedRecipe.get("altar").getAsString());
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(5, Ingredient.EMPTY);
@@ -108,7 +116,7 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new AltarRecipe(pRecipeId, output, inputs);
+            return new AltarRecipe(pRecipeId, output, inputs, altar);
         }
 
         @Override
@@ -120,7 +128,8 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
             }
 
             ItemStack output = pBuffer.readItem();
-            return new AltarRecipe(pRecipeId, output, inputs);
+            AltarBlockEntity.Type altar = pBuffer.readEnum(AltarBlockEntity.Type.class);
+            return new AltarRecipe(pRecipeId, output, inputs, altar);
         }
 
         @Override
@@ -131,6 +140,7 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
                 ingredient.toNetwork(pBuffer);
             }
             pBuffer.writeItemStack(pRecipe.getResultItem(), false);
+            pBuffer.writeEnum(pRecipe.altar);
         }
     }
 }

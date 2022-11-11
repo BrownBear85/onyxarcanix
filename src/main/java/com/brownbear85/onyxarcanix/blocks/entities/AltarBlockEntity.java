@@ -1,21 +1,16 @@
 package com.brownbear85.onyxarcanix.blocks.entities;
 
-import com.brownbear85.onyxarcanix.blocks.AltarBlock;
-import com.brownbear85.onyxarcanix.blocks.ChiselableBlock;
 import com.brownbear85.onyxarcanix.blocks.PedestalBlock;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.recipe.AltarRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-import java.util.Locale;
 import java.util.Optional;
 
 public class AltarBlockEntity extends ItemHolderBlockEntity {
@@ -24,7 +19,7 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     public BlockState northBlock, southBlock, eastBlock, westBlock;
     public ItemStack northItem, southItem, eastItem, westItem;
 
-    public Type variant;
+    public Type altar;
     public enum Type {
         STONE, ONYX
     }
@@ -32,9 +27,9 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     public AltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.ALTAR_BLOCK_ENTITY.get(), pos, state);
         if (state.getBlock().equals(BlockInit.ALTAR.get())) {
-            this.variant = Type.STONE;
+            this.altar = Type.STONE;
         } else {
-            this.variant = Type.ONYX;
+            this.altar = Type.ONYX;
         }
     }
 
@@ -43,7 +38,7 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     public static void tick(Level level, BlockPos pos, BlockState state, AltarBlockEntity entity) {
         if (entity.isValid()) {
             Optional<AltarRecipe> recipe = entity.getRecipe();
-            if (recipe.isPresent()) {
+            if (recipe.isPresent() && entity.canDoRecipe(recipe.get())) {
                 entity.setItem(recipe.get().getResultItem());
                 entity.setPedestalItem(Direction.NORTH, ItemStack.EMPTY);
                 entity.setPedestalItem(Direction.SOUTH, ItemStack.EMPTY);
@@ -56,6 +51,14 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     public Optional<AltarRecipe> getRecipe() {
         refreshItems();
         return level.getRecipeManager().getRecipeFor(AltarRecipe.Type.INSTANCE, new SimpleContainer(this.getRenderStack(), northItem, southItem, westItem, eastItem), level);
+    }
+
+    public boolean canDoRecipe(AltarRecipe recipe) {
+        if (recipe.getAltar() == Type.ONYX && altar == Type.STONE) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public void refreshBlocks() {

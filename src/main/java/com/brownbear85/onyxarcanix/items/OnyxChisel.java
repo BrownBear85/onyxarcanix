@@ -3,7 +3,7 @@ package com.brownbear85.onyxarcanix.items;
 import com.brownbear85.onyxarcanix.blocks.ChiselableBlock;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.capabilities.PlayerRunes;
-import com.brownbear85.onyxarcanix.util.KeyBindings;
+import com.brownbear85.onyxarcanix.client.KeyBindings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
