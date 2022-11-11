@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "type=stone": {
       "model": "onyxarcanix:block/altar_stone"
+    },
+    "type=onyx": {
+      "model": "onyxarcanix:block/altar_onyx"
     }
   }
 }

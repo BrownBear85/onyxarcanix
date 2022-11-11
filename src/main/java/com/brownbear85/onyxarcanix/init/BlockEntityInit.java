@@ -18,6 +18,6 @@ public class BlockEntityInit {
 
     public static final RegistryObject<BlockEntityType<AltarBlockEntity>> ALTAR_BLOCK_ENTITY = BLOCK_ENTITIES.register("altar",
             () -> BlockEntityType.Builder.of(AltarBlockEntity::new,
-            BlockInit.ALTAR.get(), BlockInit.ONYX_ALTAR.get())
+            BlockInit.ALTAR.get())
             .build(null));
 }

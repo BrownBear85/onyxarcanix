@@ -26,6 +26,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class AltarBlock extends ItemHolderBlock {
+    public static final EnumProperty<AltarBlock.Types> TYPE = EnumProperty.create("type", AltarBlock.Types.class);
+
     public AltarBlock(Properties properties, float itemX, float itemY, float itemZ) {
         super(properties, itemX, itemY, itemZ);
     }
@@ -70,38 +72,37 @@ public class AltarBlock extends ItemHolderBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        System.out.println(level.getBlockEntity(pos, BlockEntityInit.ALTAR_BLOCK_ENTITY.get()).get().type.toString());
         return super.use(state, level, pos, player, hand, result);
     }
 
     /* blockstates */
 
-//    @Override
-//    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-//        builder.add(TYPE);
-//    }
-//
-//    @Nullable
-//    @Override
-//    public BlockState getStateForPlacement(BlockPlaceContext context) {
-//        return super.getStateForPlacement(context).setValue(TYPE, Types.STONE);
-//    }
-//
-//    public enum Types implements StringRepresentable {
-//        STONE("stone"), ONYX("onyx");
-//
-//        private final String name;
-//
-//        Types(String name) {
-//            this.name = name;
-//        }
-//
-//        public String toString() {
-//            return this.name;
-//        }
-//
-//        public String getSerializedName() {
-//            return this.name;
-//        }
-//    }
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(TYPE);
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return super.getStateForPlacement(context).setValue(TYPE, Types.STONE);
+    }
+
+    public enum Types implements StringRepresentable {
+        STONE("stone"), ONYX("onyx");
+
+        private final String name;
+
+        Types(String name) {
+            this.name = name;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+
+        public String getSerializedName() {
+            return this.name;
+        }
+    }
 }

@@ -4,7 +4,6 @@ import com.brownbear85.onyxarcanix.blocks.AltarBlock;
 import com.brownbear85.onyxarcanix.blocks.ChiselableBlock;
 import com.brownbear85.onyxarcanix.blocks.PedestalBlock;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
-import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.recipe.AltarRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,19 +23,12 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     public BlockState northBlock, southBlock, eastBlock, westBlock;
     public ItemStack northItem, southItem, eastItem, westItem;
 
-    public Type type;
-    public enum Type {
-        STONE, ONYX
-    }
-
     public AltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.ALTAR_BLOCK_ENTITY.get(), pos, state);
-        if (state.getBlock().equals(BlockInit.ALTAR.get())) {
-            this.type = Type.STONE;
-        } else {
-            this.type = Type.ONYX;
-        }
+        this.type = state.getValue(AltarBlock.TYPE).toString().toLowerCase();
     }
+
+    public String type; // pull from blockstate
 
     /* recipe management */
 
@@ -100,5 +92,23 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
 
     public void setPedestalItem(Direction direction, ItemStack stack) {
         getPedestal(direction).setItem(stack);
+    }
+
+    /* blockstates */
+
+
+
+    /* nbt */
+
+    @Override
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
+        type = nbt.getString("type");
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
+        nbt.putString("type", type);
     }
 }
