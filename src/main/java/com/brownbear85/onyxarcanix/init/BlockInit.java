@@ -66,17 +66,18 @@ public class BlockInit {
     public static final RegistryObject<Block> STONE_PEDESTAL = register("stone_pedestal",
             () -> new PedestalBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion(), 0.5F, 1.5F, 0.5F), ItemInit.properties());
 
-    public static final RegistryObject<Block> ALTAR = registerAltar();
+
+
+    public static final RegistryObject<Block> ALTAR = register("altar",
+            () -> new AltarBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion(), 0.5F, 1.0F, 0.5F),
+            ItemInit.properties().stacksTo(1));
+
+    public static final RegistryObject<Block> ONYX_ALTAR = register("onyx_altar",
+            () -> new AltarBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion(), 0.5F, 1.0F, 0.5F),
+            ItemInit.properties().stacksTo(1));
 
 
     /* registration methods */
-
-    private static RegistryObject<Block> registerAltar() {
-        RegistryObject<Block> altar = BLOCKS.register("altar",
-                () -> new AltarBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).dynamicShape().noOcclusion(), 0.5F, 1.0F, 0.5F));
-        ItemInit.ITEMS.register("altar", () -> new BlockItem(altar.get(), ItemInit.properties().stacksTo(1)));
-        return altar;
-    }
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier, Item.Properties properties) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);
