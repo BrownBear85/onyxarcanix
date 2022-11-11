@@ -70,7 +70,6 @@ public class AltarBlock extends ItemHolderBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        System.out.println(level.getBlockEntity(pos, BlockEntityInit.ALTAR_BLOCK_ENTITY.get()).get().type.toString());
         return super.use(state, level, pos, player, hand, result);
     }
 

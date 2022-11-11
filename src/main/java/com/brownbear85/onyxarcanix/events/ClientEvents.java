@@ -50,6 +50,7 @@ public class ClientEvents {
         public static void onClientSetup(FMLCommonSetupEvent event) {
             ((ItemHolderBlock) BlockInit.STONE_PEDESTAL.get()).type = BlockEntityInit.PEDESTAL_BLOCK_ENTITY.get();
             ((ItemHolderBlock) BlockInit.ALTAR.get()).type = BlockEntityInit.ALTAR_BLOCK_ENTITY.get();
+            ((ItemHolderBlock) BlockInit.ONYX_ALTAR.get()).type = BlockEntityInit.ALTAR_BLOCK_ENTITY.get();
         }
     }
 

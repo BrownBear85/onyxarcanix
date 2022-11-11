@@ -24,7 +24,7 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     public BlockState northBlock, southBlock, eastBlock, westBlock;
     public ItemStack northItem, southItem, eastItem, westItem;
 
-    public Type type;
+    public Type variant;
     public enum Type {
         STONE, ONYX
     }
@@ -32,9 +32,9 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     public AltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.ALTAR_BLOCK_ENTITY.get(), pos, state);
         if (state.getBlock().equals(BlockInit.ALTAR.get())) {
-            this.type = Type.STONE;
+            this.variant = Type.STONE;
         } else {
-            this.type = Type.ONYX;
+            this.variant = Type.ONYX;
         }
     }
 
