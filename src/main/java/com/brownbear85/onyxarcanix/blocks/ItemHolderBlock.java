@@ -52,6 +52,10 @@ public class ItemHolderBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        try {return this.type.create(pos, state);}
+        catch (Exception e) {
+            System.out.println("you probably need to set the type manually in ClientEvents.java");
+        }
         return this.type.create(pos, state);
     }
 }
