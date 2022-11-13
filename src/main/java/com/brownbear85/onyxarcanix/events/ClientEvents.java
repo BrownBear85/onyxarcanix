@@ -8,13 +8,17 @@ import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ItemInit;
+import com.brownbear85.onyxarcanix.init.ParticleInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
 import com.brownbear85.onyxarcanix.client.KeyBindings;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -36,21 +40,19 @@ public class ClientEvents {
                     ModNetworking.sendToServer(new ChiselCycleRuneC2SPacket(stack));
                 }
             }
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = OnyxArcanix.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            ModNetworking.register();
-        }
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLCommonSetupEvent event) {
-            ((ItemHolderBlock) BlockInit.STONE_PEDESTAL.get()).type = BlockEntityInit.PEDESTAL_BLOCK_ENTITY.get();
-            ((ItemHolderBlock) BlockInit.ALTAR.get()).type = BlockEntityInit.ALTAR_BLOCK_ENTITY.get();
-            ((ItemHolderBlock) BlockInit.ONYX_ALTAR.get()).type = BlockEntityInit.ALTAR_BLOCK_ENTITY.get();
+            if (KeyBindings.TEST.consumeClick()) {
+                Player player = Minecraft.getInstance().player;
+                Level level = player.getLevel();
+                if (level instanceof ClientLevel clientLevel) {
+                    for (int i = 0; i < 30; i++) {
+                        clientLevel.addParticle(ParticleInit.ALTAR_PARTICLES.get(),
+                    player.getX() + level.random.nextDouble() - 0.5,
+                    player.getY() + level.random.nextDouble() - 0.5,
+                    player.getZ() + level.random.nextDouble() - 0.5,
+                        0, 0, 0);
+                    }
+                }
+            }
         }
     }
 

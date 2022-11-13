@@ -22,11 +22,11 @@ public class ItemHolderBlockEntityRenderer implements BlockEntityRenderer<ItemHo
 
     }
 
-    private float rotation() {
+    public static float rotation() {
         return System.currentTimeMillis() % 360000 * 0.001F;
     }
 
-    private double bobHeight() {
+    public static double bobHeight() {
         return Math.sin(System.currentTimeMillis() % Math.round(Math.PI * 4000) * 0.002F) * 0.1;
     }
 

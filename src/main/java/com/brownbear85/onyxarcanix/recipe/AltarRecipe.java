@@ -19,12 +19,14 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
     private final AltarBlockEntity.Type altar;
+    private final int time;
 
-    public AltarRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, AltarBlockEntity.Type altar) {
+    public AltarRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, AltarBlockEntity.Type altar, int time) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
         this.altar = altar;
+        this.time = time;
     }
 
     @Override
@@ -57,6 +59,10 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
 
     public AltarBlockEntity.Type getAltar() {
         return altar;
+    }
+
+    public int getTime() {
+        return time;
     }
 
     @Override
@@ -108,6 +114,7 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
         public AltarRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
             AltarBlockEntity.Type altar = AltarBlockEntity.Type.valueOf(pSerializedRecipe.get("altar").getAsString());
+            int time = pSerializedRecipe.get("time").getAsInt();
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(5, Ingredient.EMPTY);
@@ -116,7 +123,7 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new AltarRecipe(pRecipeId, output, inputs, altar);
+            return new AltarRecipe(pRecipeId, output, inputs, altar, time);
         }
 
         @Override
@@ -129,7 +136,9 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
 
             ItemStack output = pBuffer.readItem();
             AltarBlockEntity.Type altar = pBuffer.readEnum(AltarBlockEntity.Type.class);
-            return new AltarRecipe(pRecipeId, output, inputs, altar);
+            int time = pBuffer.readInt();
+
+            return new AltarRecipe(pRecipeId, output, inputs, altar, time);
         }
 
         @Override
@@ -139,8 +148,10 @@ public class AltarRecipe implements Recipe<SimpleContainer> {
             for (Ingredient ingredient : pRecipe.getIngredients()) {
                 ingredient.toNetwork(pBuffer);
             }
+
             pBuffer.writeItemStack(pRecipe.getResultItem(), false);
             pBuffer.writeEnum(pRecipe.altar);
+            pBuffer.writeInt(pRecipe.time);
         }
     }
 }

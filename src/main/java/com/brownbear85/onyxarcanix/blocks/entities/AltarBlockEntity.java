@@ -1,11 +1,17 @@
 package com.brownbear85.onyxarcanix.blocks.entities;
 
 import com.brownbear85.onyxarcanix.blocks.PedestalBlock;
+import com.brownbear85.onyxarcanix.blocks.entities.renderer.ItemHolderBlockEntityRenderer;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
+import com.brownbear85.onyxarcanix.init.ParticleInit;
 import com.brownbear85.onyxarcanix.recipe.AltarRecipe;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -24,6 +30,9 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
         STONE, ONYX
     }
 
+    public int progress;
+    public String currentRecipe = "none";
+
     public AltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.ALTAR_BLOCK_ENTITY.get(), pos, state);
         if (state.getBlock().equals(BlockInit.ALTAR.get())) {
@@ -35,15 +44,56 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
 
     /* recipe management */
 
+    private static final Direction[] pedestalDirections = {Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
     public static void tick(Level level, BlockPos pos, BlockState state, AltarBlockEntity entity) {
         if (entity.isValid()) {
             Optional<AltarRecipe> recipe = entity.getRecipe();
             if (recipe.isPresent() && entity.canDoRecipe(recipe.get())) {
-                entity.setItem(recipe.get().getResultItem());
-                entity.setPedestalItem(Direction.NORTH, ItemStack.EMPTY);
-                entity.setPedestalItem(Direction.SOUTH, ItemStack.EMPTY);
-                entity.setPedestalItem(Direction.EAST, ItemStack.EMPTY);
-                entity.setPedestalItem(Direction.WEST, ItemStack.EMPTY);
+                entity.progress++;
+                entity.currentRecipe = recipe.get().getId().toString();
+
+                if (level instanceof ServerLevel serverLevel) {
+                    if (entity.progress < recipe.get().getTime() - 65) {
+                        for (Direction dir : pedestalDirections) {
+                            if (level.random.nextBoolean()) {
+                                serverLevel.sendParticles(ParticleInit.ALTAR_PARTICLES.get(),
+                                        pos.getX() + 0.5 + dir.getStepX() * (PEDESTAL_DISTANCE - 0.01),
+                                        pos.getY() + 1.2,
+                                        pos.getZ() + 0.5 + dir.getStepZ() * (PEDESTAL_DISTANCE - 0.01),
+                                        1, 0, 0, 0, 0);
+                            }
+                            serverLevel.sendParticles(ParticleInit.ALTAR_PARTICLES.get(),
+                                    pos.getX() + 0.5 + dir.getStepX() * (PEDESTAL_DISTANCE - 0.01),
+                                    pos.getY() + 1.2,
+                                    pos.getZ() + 0.5 + dir.getStepZ() * (PEDESTAL_DISTANCE - 0.01),
+                                    1, 0, 0, 0, 0.05);
+                        }
+                    }
+                    if (entity.progress >= 68) {
+                        serverLevel.sendParticles(ParticleInit.ALTAR_PARTICLES.get(),
+                                pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
+                                4, 0, 0, 0, 0.1);
+                    }
+                }
+                if (entity.progress >= recipe.get().getTime()) {
+                    entity.progress = 0;
+                    entity.currentRecipe = "none";
+
+                    if (entity.level instanceof ServerLevel serverLevel) {
+                        serverLevel.sendParticles(ParticleTypes.FLASH,
+                                pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
+                                2, 0, 0, 0, 0.1);
+                    }
+
+                    entity.setItem(recipe.get().getResultItem());
+                    entity.setPedestalItem(Direction.NORTH, ItemStack.EMPTY);
+                    entity.setPedestalItem(Direction.SOUTH, ItemStack.EMPTY);
+                    entity.setPedestalItem(Direction.EAST, ItemStack.EMPTY);
+                    entity.setPedestalItem(Direction.WEST, ItemStack.EMPTY);
+                }
+            } else {
+                entity.progress = 0;
+                entity.currentRecipe = "none";
             }
         }
     };
@@ -103,5 +153,21 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
 
     public void setPedestalItem(Direction direction, ItemStack stack) {
         getPedestal(direction).setItem(stack);
+    }
+
+    /* nbt */
+
+    @Override
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
+        progress = nbt.getInt("progress");
+        currentRecipe = nbt.getString("recipe");
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
+        nbt.putInt("progress", progress);
+        nbt.putString("recipe", currentRecipe);
     }
 }

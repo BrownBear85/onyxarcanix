@@ -90,7 +90,7 @@ public class ItemHolderBlockEntity extends BlockEntity {
         }
     }
 
-    /* nbt TODO: figure out how to set nbt on placement and save nbt on breaking (for altar type, should still drop item on breaking */
+    /* nbt */
 
     @Override
     public void load(CompoundTag nbt) {

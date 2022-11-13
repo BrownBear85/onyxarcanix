@@ -1,6 +1,7 @@
 {
   "type": "onyxarcanix:altar_crafting",
   "altar": "STONE",
+  "time": 200,
   "ingredients": [
     {
       "item": "minecraft:iron_ingot"
