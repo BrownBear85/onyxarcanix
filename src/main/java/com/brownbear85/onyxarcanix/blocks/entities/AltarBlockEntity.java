@@ -1,29 +1,21 @@
 package com.brownbear85.onyxarcanix.blocks.entities;
 
-import com.brownbear85.onyxarcanix.OnyxArcanix;
 import com.brownbear85.onyxarcanix.blocks.PedestalBlock;
-import com.brownbear85.onyxarcanix.blocks.entities.renderer.ItemHolderBlockEntityRenderer;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ParticleInit;
 import com.brownbear85.onyxarcanix.init.SoundInit;
 import com.brownbear85.onyxarcanix.recipe.AltarRecipe;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Optional;
 
@@ -59,9 +51,6 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
             if (recipe.isPresent() && entity.canDoRecipe(recipe.get())) {
                 if (entity.progress % 20 == 0) {
                     if (level instanceof ServerLevel serverLevel) {
-                        double x = entity.getBlockPos().getX() + 0.5D;
-                        double y = entity.getBlockPos().getY();
-                        double z = entity.getBlockPos().getZ() + 0.5D;
                         serverLevel.playSound(null, entity.getBlockPos(), SoundInit.ALTAR_PROCESSING.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
                 }
@@ -100,10 +89,6 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
                         serverLevel.sendParticles(ParticleTypes.FLASH,
                                 pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
                                 2, 0, 0, 0, 0.1);
-
-                        double x = entity.getBlockPos().getX() + 0.5D;
-                        double y = entity.getBlockPos().getY();
-                        double z = entity.getBlockPos().getZ() + 0.5D;
                         serverLevel.playSound(null, entity.getBlockPos(), SoundInit.ALTAR_FINISH.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
                     }
@@ -119,7 +104,7 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
                 entity.currentRecipe = "none";
             }
         }
-    };
+    }
 
     public Optional<AltarRecipe> getRecipe() {
         refreshItems();
@@ -127,11 +112,7 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
     }
 
     public boolean canDoRecipe(AltarRecipe recipe) {
-        if (recipe.getAltar() == Type.ONYX && altar == Type.STONE) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(recipe.getAltar() == Type.ONYX && altar == Type.STONE);
     }
 
     public void refreshBlocks() {
