@@ -800,6 +800,6 @@ public final class AssetCreator {
     }
 
     public static void main(String[] args) {
-//        cloneRecipe("chiseled_stone_bricks", new String[][] {{"minecraft:stone", "minecraft:chiseled_stone_bricks"},{"onyxarcanix:onyx", "onyxarcanix:chiseled_onyx_bricks"}}, "chiseled_onyx_bricks");
+
     }
 }

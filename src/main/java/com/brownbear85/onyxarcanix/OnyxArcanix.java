@@ -1,9 +1,6 @@
 package com.brownbear85.onyxarcanix;
 
-import com.brownbear85.onyxarcanix.init.BlockEntityInit;
-import com.brownbear85.onyxarcanix.init.BlockInit;
-import com.brownbear85.onyxarcanix.init.ItemInit;
-import com.brownbear85.onyxarcanix.init.ParticleInit;
+import com.brownbear85.onyxarcanix.init.*;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import com.brownbear85.onyxarcanix.recipe.RecipeInit;
 import net.minecraft.core.NonNullList;
@@ -41,6 +38,7 @@ public class OnyxArcanix {
         BlockEntityInit.BLOCK_ENTITIES.register(bus);
         RecipeInit.register(bus);
         ParticleInit.register(bus);
+        SoundInit.register(bus);
     }
 
     public static final CreativeModeTab TAB = new CreativeModeTab(MODID) {

@@ -61,6 +61,8 @@ public class AltarParticles extends TextureSheetParticle {
         destY = destPos.getY() + 0.5;
         destZ = destPos.getZ() + 0.5;
 
+        this.move((level.random.nextDouble() - 0.5) * 0.1, (level.random.nextDouble() - 0.5) * 0.1, (level.random.nextDouble() - 0.5) * 0.1);
+
         this.rCol = 0;
         this.gCol = 0;
         this.bCol = 0;
@@ -80,7 +82,7 @@ public class AltarParticles extends TextureSheetParticle {
     }
 
     public void streamfade() {
-        this.alpha = (1 - 0.1F * Math.max(0, age - lifetime + 10));
+        this.alpha = Math.max(0, (0.8F - 0.1F * Math.max(0, age - lifetime + 10)));
     }
 
     public void fadeout() {
@@ -124,9 +126,6 @@ public class AltarParticles extends TextureSheetParticle {
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double dx, double dy, double dz) {
             AltarParticles altarparticles = new AltarParticles(level, x, y, z, dx, dy, dz);
             altarparticles.pickSprite(this.sprites);
-
-            System.out.println(dx + ", " + dy + ", " + dz);
-
             return altarparticles;
         }
     }

@@ -1,0 +1,14 @@
+{
+  "altar_processing": {
+    "subtitle": "sounds.onyxarcanix.altar_processing",
+    "sounds": [
+      "onyxarcanix:altar_processing"
+    ]
+  },
+  "altar_finish": {
+    "subtitle": "sounds.onyxarcanix.altar_finish",
+    "sounds": [
+      "onyxarcanix:altar_finish"
+    ]
+  }
+}
