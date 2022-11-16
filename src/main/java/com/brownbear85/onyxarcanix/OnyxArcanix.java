@@ -1,10 +1,7 @@
 package com.brownbear85.onyxarcanix;
 
 import com.brownbear85.onyxarcanix.init.*;
-import com.brownbear85.onyxarcanix.networking.ModNetworking;
-import com.brownbear85.onyxarcanix.recipe.RecipeInit;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
+import com.brownbear85.onyxarcanix.init.RecipeInit;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.player.Player;
@@ -12,9 +9,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 

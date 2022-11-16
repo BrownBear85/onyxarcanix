@@ -1,6 +1,7 @@
-package com.brownbear85.onyxarcanix.recipe;
+package com.brownbear85.onyxarcanix.init;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
+import com.brownbear85.onyxarcanix.recipe.AltarRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

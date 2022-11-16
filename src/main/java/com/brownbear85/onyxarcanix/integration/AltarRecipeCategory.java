@@ -55,7 +55,7 @@ public class AltarRecipeCategory implements IRecipeCategory<AltarRecipe> {
 
     @Override
     public IDrawable getIcon() {
-        return this.onyx_altar;
+        return this.stone_altar;
     }
 
     @Override
