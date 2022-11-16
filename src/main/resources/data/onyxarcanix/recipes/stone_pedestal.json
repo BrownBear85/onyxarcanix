@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " s ",
+        " r ",
+        "srs"
+    ],
+    "key": {
+        "r": {
+            "item": "onyxarcanix:runed_stone_bricks"
+        },
+        "s": {
+            "item": "minecraft:stone_brick_slab"
+        }
+    },
+    "result": {
+        "item": "onyxarcanix:stone_pedestal",
+        "count": 1
+    },
+    "group": "stone_pedestal"
+}

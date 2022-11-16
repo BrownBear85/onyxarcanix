@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "o",
+        "o"
+    ],
+    "key": {
+        "o": {
+            "item": "onyxarcanix:onyx_iron"
+        }
+    },
+    "result": {
+        "item": "onyxarcanix:onyx_iron_rod",
+        "count": 2
+    },
+    "group": "onyx_iron"
+}

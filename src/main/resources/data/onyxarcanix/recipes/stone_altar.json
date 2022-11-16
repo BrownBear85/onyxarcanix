@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "g g",
+        "rpr",
+        "sss"
+    ],
+    "key": {
+        "r": {
+            "item": "onyxarcanix:runed_stone_bricks"
+        },
+        "s": {
+            "item": "minecraft:stone_bricks"
+        },
+        "g": {
+            "item": "minecraft:gold_ingot"
+        }
+    },
+    "result": {
+        "item": "onyxarcanix:altar",
+        "count": 1
+    }
+}

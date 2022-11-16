@@ -19,10 +19,14 @@ import net.minecraftforge.registries.RegistryObject;
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OnyxArcanix.MODID);
 
+    /* crafting items */
+
     public static final RegistryObject<Item> ONYX_IRON = ITEMS.register("onyx_iron",
             () -> new Item(properties()));
     public static final RegistryObject<Item> ONYX_IRON_ROD = ITEMS.register("onyx_iron_rod",
             () -> new Item(properties()));
+
+    /* functional items */
 
     public static final RegistryObject<Item> ONYX_CHISEL = ITEMS.register("onyx_chisel",
             () -> new OnyxChisel(properties().defaultDurability(192)));
@@ -33,6 +37,8 @@ public class ItemInit {
     public static final RegistryObject<SwordItem> RITUAL_KNIFE = ITEMS.register("ritual_knife",
             () -> new RitualKnife(Tiers.TIER_RITUAL_KNIFE,0, -2.6F, properties().defaultDurability(128)));
 
+
+    /* registry */
 
     public static Item.Properties properties() {
         return new Item.Properties().tab(OnyxArcanix.TAB);

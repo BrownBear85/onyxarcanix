@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "ooo",
+        "oao",
+        "ooo"
+    ],
+    "key": {
+        "o": {
+            "item": "onyxarcanix:onyx_iron"
+        },
+        "a": {
+            "item": "minecraft:apple"
+        }
+    },
+    "result": {
+        "item": "onyxarcanix:onyx_apple",
+        "count": 1
+    },
+    "group": "onyx_apple"
+}
