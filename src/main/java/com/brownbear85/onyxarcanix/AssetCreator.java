@@ -3,8 +3,6 @@ package com.brownbear85.onyxarcanix;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringReader;
-import java.util.Map;
 import java.util.Scanner;
 
 public final class AssetCreator {
@@ -520,6 +518,16 @@ public final class AssetCreator {
                   }
                 }
                 """;
+        public static final String stonecutterRecipe = """
+                {
+                  "type": "minecraft:stonecutting",
+                  "count": %d,
+                  "ingredient": {
+                    "item": "%s"
+                  },
+                  "result": "%s"
+                }
+                """;
 
     }
 
@@ -713,6 +721,10 @@ public final class AssetCreator {
         }
     }
 
+    public static void createStonecutterRecipe(String input, String result, int count) {
+        createJSON("data\\onyxarcanix\\recipes", result.split(":")[1] + "_from_" + input.split(":")[1] + "_stonecutting", String.format(Templates.stonecutterRecipe, count, input, result));
+    }
+
     /* block/item creation methods */
 
     public static void cloneRecipe(String recipe, String[][] strings, String name) {
@@ -800,6 +812,18 @@ public final class AssetCreator {
     }
 
     public static void main(String[] args) {
+        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_bricks", 1);
+        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_brick_slab", 2);
+        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_brick_stairs", 1);
+        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_brick_wall", 1);
+        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:chiseled_onyx_bricks", 1);
+        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_slab", 2);
+        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_stairs", 1);
+        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_wall", 1);
 
+        createStonecutterRecipe("onyxarcanix:onyx_bricks", "onyxarcanix:onyx_brick_slab", 2);
+        createStonecutterRecipe("onyxarcanix:onyx_bricks", "onyxarcanix:onyx_brick_stairs", 1);
+        createStonecutterRecipe("onyxarcanix:onyx_bricks", "onyxarcanix:onyx_brick_wall", 1);
+        createStonecutterRecipe("onyxarcanix:onyx_bricks", "onyxarcanix:chiseled_onyx_bricks", 1);
     }
 }

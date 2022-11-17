@@ -4,19 +4,19 @@
   "time": 200,
   "ingredients": [
     {
+      "item": "minecraft:stone"
+    },
+    {
+      "item": "minecraft:chiseled_deepslate"
+    },
+    {
+      "item": "minecraft:chiseled_deepslate"
+    },
+    {
       "item": "minecraft:smooth_basalt"
     },
     {
-      "item": "minecraft:chiseled_deepslate"
-    },
-    {
-      "item": "minecraft:chiseled_deepslate"
-    },
-    {
-      "item": "minecraft:chiseled_polished_blackstone"
-    },
-    {
-      "item": "minecraft:chiseled_polished_blackstone"
+      "item": "minecraft:smooth_basalt"
     }
   ],
   "output": {
