@@ -1,0 +1,25 @@
+{
+  "type": "onyxarcanix:altar_crafting",
+  "altar": "STONE",
+  "time": 200,
+  "ingredients": [
+    {
+      "item": "minecraft:smooth_basalt"
+    },
+    {
+      "item": "minecraft:chiseled_deepslate"
+    },
+    {
+      "item": "minecraft:chiseled_deepslate"
+    },
+    {
+      "item": "minecraft:chiseled_polished_blackstone"
+    },
+    {
+      "item": "minecraft:chiseled_polished_blackstone"
+    }
+  ],
+  "output": {
+    "item": "onyxarcanix:onyx"
+  }
+}
