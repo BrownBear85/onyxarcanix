@@ -12,8 +12,11 @@ import com.brownbear85.onyxarcanix.init.ParticleInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
 import com.brownbear85.onyxarcanix.client.KeyBindings;
+import com.brownbear85.onyxarcanix.particle.MagicParticleOptions;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -45,8 +48,7 @@ public class ClientEvents {
                 Level level = player.getLevel();
                 if (level instanceof ClientLevel clientLevel) {
                     for (int i = 0; i < 30; i++) {
-                        clientLevel.addParticle(ParticleInit.ALTAR_PARTICLES.get(),
-                    player.getX() + level.random.nextDouble() - 0.5,
+                        clientLevel.addParticle(MagicParticleOptions.ALTAR_OTHER, player.getX() + level.random.nextDouble() - 0.5,
                     player.getY() + level.random.nextDouble() - 0.5,
                     player.getZ() + level.random.nextDouble() - 0.5,
                         0, 0, 0);

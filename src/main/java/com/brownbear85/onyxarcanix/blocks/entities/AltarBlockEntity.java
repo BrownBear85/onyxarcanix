@@ -5,6 +5,7 @@ import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ParticleInit;
 import com.brownbear85.onyxarcanix.init.SoundInit;
+import com.brownbear85.onyxarcanix.particle.MagicParticleOptions;
 import com.brownbear85.onyxarcanix.recipe.AltarRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -62,13 +63,13 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
                     if (entity.progress < recipe.get().getTime() - 68) {
                         for (Direction dir : pedestalDirections) {
                             if (level.random.nextBoolean()) {
-                                serverLevel.sendParticles(ParticleInit.ALTAR_PARTICLES.get(),
+                                serverLevel.sendParticles(MagicParticleOptions.ALTAR_STREAM(dir),
                                         pos.getX() + 0.5 + dir.getStepX() * (PEDESTAL_DISTANCE - 0.01),
                                         pos.getY() + 1.2,
                                         pos.getZ() + 0.5 + dir.getStepZ() * (PEDESTAL_DISTANCE - 0.01),
                                         1, 0, 0, 0, 0);
                             }
-                            serverLevel.sendParticles(ParticleInit.ALTAR_PARTICLES.get(),
+                            serverLevel.sendParticles(MagicParticleOptions.ALTAR_OTHER,
                                     pos.getX() + 0.5 + dir.getStepX() * (PEDESTAL_DISTANCE - 0.01),
                                     pos.getY() + 1.2,
                                     pos.getZ() + 0.5 + dir.getStepZ() * (PEDESTAL_DISTANCE - 0.01),
@@ -76,7 +77,7 @@ public class AltarBlockEntity extends ItemHolderBlockEntity {
                         }
                     }
                     if (entity.progress >= 68) {
-                        serverLevel.sendParticles(ParticleInit.ALTAR_PARTICLES.get(),
+                        serverLevel.sendParticles(MagicParticleOptions.ALTAR_OTHER,
                                 pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
                                 4, 0, 0, 0, 0.1);
                     }

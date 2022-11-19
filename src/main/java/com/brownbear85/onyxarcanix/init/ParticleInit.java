@@ -1,8 +1,8 @@
 package com.brownbear85.onyxarcanix.init;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
+import com.brownbear85.onyxarcanix.particle.MagicParticleOptions;
 import com.mojang.serialization.Codec;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,10 +15,10 @@ public class ParticleInit {
 
     public static final RegistryObject<SimpleParticleType> ALTAR_PARTICLES = PARTICLE_TYPES.register("altar_particles", () -> new SimpleParticleType(true));
 
-    public static final RegistryObject<ParticleType<DustParticleOptions>> MAGIC_PARTICLE = PARTICLE_TYPES.register("magic_particle", () -> new ParticleType<>(true, DustParticleOptions.DESERIALIZER) {
+    public static final RegistryObject<ParticleType<MagicParticleOptions>> MAGIC_PARTICLE = PARTICLE_TYPES.register("magic_particle", () -> new ParticleType<>(true, MagicParticleOptions.DESERIALIZER) {
         @Override
-        public Codec<DustParticleOptions> codec() {
-            return DustParticleOptions.CODEC;
+        public Codec<MagicParticleOptions> codec() {
+            return MagicParticleOptions.CODEC;
         }
     });
 
@@ -26,4 +26,6 @@ public class ParticleInit {
     public static void register(IEventBus bus) {
         PARTICLE_TYPES.register(bus);
     }
+
+
 }
