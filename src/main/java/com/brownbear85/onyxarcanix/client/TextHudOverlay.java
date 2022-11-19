@@ -7,11 +7,14 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 public class TextHudOverlay {
@@ -27,8 +30,11 @@ public class TextHudOverlay {
                     width * 0.5F + 6.5F, height * 0.5F, 0);
         }
 
-        Ray ray = new Ray(player);
-        BlockState state = ray.cast(player.getReachDistance(), 0.5).getState();
+        HitResult result = Minecraft.getInstance().hitResult;
+        if (Minecraft.getInstance().level == null || result == null || result.getType() != HitResult.Type.BLOCK) {
+            return;
+        }
+        BlockState state = Minecraft.getInstance().level.getBlockState(new BlockPos(((BlockHitResult) result).getBlockPos()));
         if (state.getBlock() instanceof ChiselableBlock) {
             ChiselableBlock.Runes rune = state.getValue(ChiselableBlock.RUNE);
             if (rune == ChiselableBlock.Runes.BLANK) {
