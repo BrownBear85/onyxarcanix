@@ -8,10 +8,7 @@ import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
 import com.brownbear85.onyxarcanix.init.ParticleInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
-import com.brownbear85.onyxarcanix.particle.AltarParticles;
 import com.brownbear85.onyxarcanix.particle.MagicParticle;
-import com.brownbear85.onyxarcanix.particle.MagicParticleOptions;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +19,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 // go to the Event class, then press Ctrl+H to see all events
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
@@ -67,7 +63,6 @@ public class ModEvents {
 
         @SubscribeEvent
         public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
-            event.register(ParticleInit.ALTAR_PARTICLES.get(), AltarParticles.Provider::new);
             event.register(ParticleInit.MAGIC_PARTICLE.get(), MagicParticle.Provider::new);
         }
     }
