@@ -33,6 +33,7 @@ public class ItemHolderBlockEntity extends BlockEntity {
         @Override
         protected void onContentsChanged(int slot) {
             if (!level.isClientSide()) {
+                setChanged(level, getBlockPos(), getBlockState());
                 ModNetworking.sendToClients(new ItemStackSyncC2SPacket(this, getBlockPos()));
             }
         }
@@ -86,7 +87,6 @@ public class ItemHolderBlockEntity extends BlockEntity {
     }
 
     public void setHandler(ItemStackHandler itemStackHandler) {
-        System.out.println("packet: " + this.itemHandler.getStackInSlot(0) + " -> " + itemStackHandler.getStackInSlot(0));
         this.itemHandler.setStackInSlot(0, itemStackHandler.getStackInSlot(0));
     }
 
@@ -99,7 +99,7 @@ public class ItemHolderBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        this.itemHandler.deserializeNBT(nbt.getCompound("item"));
+        this.itemHandler.deserializeNBT(nbt.getCompound("Item"));
     }
 
     @Override
