@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public final class AssetCreator {
+    public static final String MOD_PATH = "C:\\Users\\Connor Wright\\Desktop\\onyx_arcanix\\onyxarcanix";
+
     public static class Templates {
         public static final String basicBlockstate = """
                 {
@@ -537,7 +539,7 @@ public final class AssetCreator {
 
     public static void createJSON(String path, String name, String contents) {
         try {
-            File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\" + path + "\\" + name + ".json");
+            File file = new File(MOD_PATH + "\\src\\main\\resources\\" + path + "\\" + name + ".json");
             if (file.createNewFile()) {
                 FileWriter writer = new FileWriter(file);
                 writer.write(contents);
@@ -668,7 +670,7 @@ public final class AssetCreator {
 
     private static void addToLang(String key, String value) {
         try {
-            File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\lang\\en_us.json");
+            File file = new File(MOD_PATH + "\\src\\main\\resources\\assets\\onyxarcanix\\lang\\en_us.json");
             Scanner scanner = new Scanner(file);
             StringBuilder builder = new StringBuilder();
             String data;
@@ -696,7 +698,7 @@ public final class AssetCreator {
 
     private static void addToTag(String path, String tag, String item) {
         try {
-            File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\data\\" + path + "\\" + tag + ".json");
+            File file = new File(MOD_PATH + "\\src\\main\\resources\\data\\" + path + "\\" + tag + ".json");
             Scanner scanner = new Scanner(file);
             StringBuilder builder = new StringBuilder();
             String data;
@@ -765,7 +767,7 @@ public final class AssetCreator {
     public static void createRunedBlock(String name) {
         for (String s : alphabet) {
             try {
-                File blockModel = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\runed_" + name + "\\rune_" + s + ".json");
+                File blockModel = new File(MOD_PATH + "\\src\\main\\resources\\assets\\onyxarcanix\\models\\block\\runed_" + name + "\\rune_" + s + ".json");
                 if (blockModel.createNewFile()) {
                     FileWriter writer = new FileWriter(blockModel);
                     writer.write(String.format(Templates.runedBlockModel, s));
@@ -812,18 +814,5 @@ public final class AssetCreator {
     }
 
     public static void main(String[] args) {
-        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_bricks", 1);
-        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_brick_slab", 2);
-        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_brick_stairs", 1);
-        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_brick_wall", 1);
-        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:chiseled_onyx_bricks", 1);
-        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_slab", 2);
-        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_stairs", 1);
-        createStonecutterRecipe("onyxarcanix:onyx", "onyxarcanix:onyx_wall", 1);
-
-        createStonecutterRecipe("onyxarcanix:onyx_bricks", "onyxarcanix:onyx_brick_slab", 2);
-        createStonecutterRecipe("onyxarcanix:onyx_bricks", "onyxarcanix:onyx_brick_stairs", 1);
-        createStonecutterRecipe("onyxarcanix:onyx_bricks", "onyxarcanix:onyx_brick_wall", 1);
-        createStonecutterRecipe("onyxarcanix:onyx_bricks", "onyxarcanix:chiseled_onyx_bricks", 1);
     }
 }

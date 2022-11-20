@@ -34,7 +34,10 @@ public class ItemInit {
             () -> new OnyxApple(properties().food(Foods.ONYX_APPLE)));
 
     public static final RegistryObject<Item> WAND = ITEMS.register("wand",
-            () -> new OnyxApple(properties()));
+            () -> new Item(properties()));
+
+    public static final RegistryObject<Item> SPELLBOOK = ITEMS.register("spellbook",
+            () -> new Item(properties()));
 
     public static final RegistryObject<SwordItem> RITUAL_KNIFE = ITEMS.register("ritual_knife",
             () -> new RitualKnife(Tiers.TIER_RITUAL_KNIFE,0, -2.6F, properties().defaultDurability(128)));

@@ -61,5 +61,6 @@
   "block.onyxarcanix.altar": "Stone Altar",
   "block.onyxarcanix.onyx_altar": "Onyx Altar",
   "sounds.onyxarcanix.altar_processing": "Altar is crafting",
-  "sounds.onyxarcanix.altar_finish": "Altar finishes crafting"
+  "sounds.onyxarcanix.altar_finish": "Altar finishes crafting",
+  "item.onyxarcanix.spellbook": "Spellbook"
 }

@@ -32,8 +32,9 @@ public class ItemHolderBlockEntity extends BlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
-            if (!level.isClientSide())
+            if (!level.isClientSide()) {
                 ModNetworking.sendToClients(new ItemStackSyncC2SPacket(this, getBlockPos()));
+            }
         }
 
         @Override
@@ -85,12 +86,15 @@ public class ItemHolderBlockEntity extends BlockEntity {
     }
 
     public void setHandler(ItemStackHandler itemStackHandler) {
-        for (int i = 0; i < itemStackHandler.getSlots(); i++) {
-            this.itemHandler.setStackInSlot(i, itemStackHandler.getStackInSlot(i));
-        }
+        System.out.println("packet: " + this.itemHandler.getStackInSlot(0) + " -> " + itemStackHandler.getStackInSlot(0));
+        this.itemHandler.setStackInSlot(0, itemStackHandler.getStackInSlot(0));
     }
 
     /* nbt */
+
+    public String getSide() {
+        return level.isClientSide() ? "client" : "server";
+    }
 
     @Override
     public void load(CompoundTag nbt) {
@@ -111,14 +115,15 @@ public class ItemHolderBlockEntity extends BlockEntity {
 
     @Override
     public void invalidateCaps() {
+        super.invalidateCaps();
         this.optional.invalidate();
     }
 
-    /* these make the item still render when the chunk is loaded */
-
     @Override
     public CompoundTag getUpdateTag() {
-        return saveWithoutMetadata();
+        CompoundTag tag = new CompoundTag();
+        tag.put("Item", this.itemHandler.serializeNBT());
+        return tag;
     }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
