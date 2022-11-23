@@ -4,11 +4,14 @@ import com.brownbear85.onyxarcanix.OnyxArcanix;
 import com.brownbear85.onyxarcanix.blocks.ItemHolderBlock;
 import com.brownbear85.onyxarcanix.capabilities.PlayerRunes;
 import com.brownbear85.onyxarcanix.capabilities.PlayerRunesProvider;
+import com.brownbear85.onyxarcanix.entity.client.SpellRenderer;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 import com.brownbear85.onyxarcanix.init.BlockInit;
+import com.brownbear85.onyxarcanix.init.EntityTypeInit;
 import com.brownbear85.onyxarcanix.init.ParticleInit;
 import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import com.brownbear85.onyxarcanix.particle.MagicParticle;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -17,8 +20,6 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-// go to the Event class, then press Ctrl+H to see all events
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
@@ -52,6 +53,8 @@ public class ModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModNetworking.register();
+
+            EntityRenderers.register(EntityTypeInit.SPELL.get(), SpellRenderer::new);
         }
 
         @SubscribeEvent

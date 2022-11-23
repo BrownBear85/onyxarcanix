@@ -2,6 +2,9 @@ package com.brownbear85.onyxarcanix;
 
 import com.brownbear85.onyxarcanix.init.*;
 import com.brownbear85.onyxarcanix.init.RecipeInit;
+import com.brownbear85.onyxarcanix.items.Spellbook;
+import com.brownbear85.onyxarcanix.spell.Spells;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.player.Player;
@@ -34,19 +37,30 @@ public class OnyxArcanix {
         RecipeInit.register(bus);
         ParticleInit.register(bus);
         SoundInit.register(bus);
+        EntityTypeInit.register(bus);
+
+        Spells.registerSpells();
     }
 
-    public static final CreativeModeTab TAB = new CreativeModeTab(MODID) {
+    public static final CreativeModeTab MAIN_TAB = new CreativeModeTab(MODID) {
         @Override
         public @NotNull ItemStack makeIcon() {
             return ItemInit.RITUAL_KNIFE.get().getDefaultInstance();
         }
-
-//        @Override
-//        public void fillItemList(NonNullList<ItemStack> list) {
-//            list.add(new ItemStack(Items.COOKED_BEEF, 34));
-//        }
     };
 
+    public static final CreativeModeTab SPELL_TAB = new CreativeModeTab("onyxarcanix_spells") {
+        @Override
+        public @NotNull ItemStack makeIcon() {
+            return ItemInit.SPELLBOOK.get().getDefaultInstance();
+        }
 
+        @Override
+        public void fillItemList(NonNullList<ItemStack> pItems) {
+            pItems.add(ItemInit.EMPTY_SPELLBOOK.get().getDefaultInstance());
+            pItems.add(Spellbook.withSpell("zap_shot"));
+            pItems.add(Spellbook.withSpell("fire_shot"));
+            pItems.add(Spellbook.withSpell("regrowth"));
+        }
+    };
 }

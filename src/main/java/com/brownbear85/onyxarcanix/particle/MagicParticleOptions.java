@@ -7,7 +7,6 @@ import com.mojang.math.Vector3f;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -19,6 +18,8 @@ import java.util.Locale;
 public class MagicParticleOptions implements ParticleOptions {
     public static final Vector3f BLACK_COLOR = new Vector3f(0.0F, 0.0F, 0.0F);
 
+    public static final MagicParticleOptions ALTAR_OTHER = new MagicParticleOptions(BLACK_COLOR, 0.1F, 0);
+
     public static MagicParticleOptions ALTAR_STREAM(Direction direction) {
         int behavior = 1;
         switch (direction) {
@@ -29,9 +30,20 @@ public class MagicParticleOptions implements ParticleOptions {
         return new MagicParticleOptions(BLACK_COLOR, 0.2F, behavior);
     }
 
-    public static final MagicParticleOptions ALTAR_OTHER = new MagicParticleOptions(BLACK_COLOR, 0.1F, 0);
+    public static MagicParticleOptions SPELL_SHOT(Vector3f color) {
+        return new MagicParticleOptions(color, 0.25F, 5);
+    }
 
 
+    /** small, opaque, lasts 4 seconds */
+    public static MagicParticleOptions SMALL_DEFAULT(Vector3f color) {
+        return new MagicParticleOptions(color, 0.15F, 6);
+    }
+
+    /** large, opaque, lasts 8 seconds */
+    public static MagicParticleOptions SPELL_EXPLOSION(Vector3f color) {
+        return new MagicParticleOptions(color, 0.3F, 7);
+    }
 
     public static final float MAX_SCALE = 4.0F;
     public static final float MIN_SCALE = 0.01F;

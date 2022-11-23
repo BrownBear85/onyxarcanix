@@ -42,6 +42,10 @@ public class MagicParticle<T extends MagicParticleOptions> extends TextureSheetP
         double diffZ = zo - Math.floor(zo);
         BlockPos destPos = new BlockPos(xo, yo, zo);
         switch (this.behavior) {
+            case 0: // altar other
+                this.lifetime = 40;
+                this.alpha = 0.5F;
+                break;
             case 1: // altar stream directions
                 destPos = destPos.north(AltarBlockEntity.PEDESTAL_DISTANCE);
                 break;
@@ -54,10 +58,15 @@ public class MagicParticle<T extends MagicParticleOptions> extends TextureSheetP
             case 4:
                 destPos = destPos.west(AltarBlockEntity.PEDESTAL_DISTANCE);
                 break;
-            default:
-            case 0: // altar other
-                this.lifetime = 40;
-                this.alpha = 0.5F;
+            case 5: // spell particle
+                this.lifetime = 30;
+                this.hasPhysics = true;
+                break;
+            case 6:
+                break;
+            case 7:
+                this.lifetime = 160;
+                this.hasPhysics = true;
                 break;
         }
         destX = destPos.getX() + 0.5;
@@ -76,6 +85,10 @@ public class MagicParticle<T extends MagicParticleOptions> extends TextureSheetP
                 this.move((xo - destX) / 100, (yo - destY) / 100, (zo - destZ) / 100);
             }
         } else {
+            if (behavior == 5) {
+                this.move(0.0, 0.05, 0.0);
+                quadSize -= 0.01;
+            }
             fadeout();
         }
     }

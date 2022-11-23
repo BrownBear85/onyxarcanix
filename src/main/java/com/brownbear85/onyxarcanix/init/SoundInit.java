@@ -13,6 +13,7 @@ public class SoundInit {
 
     public static RegistryObject<SoundEvent> ALTAR_PROCESSING = register("altar_processing");
     public static RegistryObject<SoundEvent> ALTAR_FINISH = register("altar_finish");
+    public static RegistryObject<SoundEvent> CAST_SPELL = register("cast_spell");
 
 
     public static RegistryObject<SoundEvent> register(String name) {

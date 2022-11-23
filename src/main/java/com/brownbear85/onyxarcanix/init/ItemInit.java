@@ -1,12 +1,9 @@
 package com.brownbear85.onyxarcanix.init;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
-import com.brownbear85.onyxarcanix.items.OnyxApple;
-import com.brownbear85.onyxarcanix.items.OnyxChisel;
-import com.brownbear85.onyxarcanix.items.RitualKnife;
+import com.brownbear85.onyxarcanix.items.*;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -34,10 +31,13 @@ public class ItemInit {
             () -> new OnyxApple(properties().food(Foods.ONYX_APPLE)));
 
     public static final RegistryObject<Item> WAND = ITEMS.register("wand",
-            () -> new Item(properties()));
+            () -> new Wand(properties().rarity(Rarity.RARE).stacksTo(1)));
 
     public static final RegistryObject<Item> SPELLBOOK = ITEMS.register("spellbook",
-            () -> new Item(properties()));
+            () -> new Spellbook(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
+
+    public static final RegistryObject<Item> EMPTY_SPELLBOOK = ITEMS.register("empty_spellbook",
+            () -> new Item(properties().rarity(Rarity.UNCOMMON).stacksTo(1)));
 
     public static final RegistryObject<SwordItem> RITUAL_KNIFE = ITEMS.register("ritual_knife",
             () -> new RitualKnife(Tiers.TIER_RITUAL_KNIFE,0, -2.6F, properties().defaultDurability(128)));
@@ -46,7 +46,7 @@ public class ItemInit {
     /* registry */
 
     public static Item.Properties properties() {
-        return new Item.Properties().tab(OnyxArcanix.TAB);
+        return new Item.Properties().tab(OnyxArcanix.MAIN_TAB);
     }
 
     public static class Foods {

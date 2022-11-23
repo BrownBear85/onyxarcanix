@@ -2,7 +2,7 @@ package com.brownbear85.onyxarcanix.networking;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
 import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
-import com.brownbear85.onyxarcanix.networking.packets.ExampleC2SPacket;
+import com.brownbear85.onyxarcanix.networking.packets.TestC2SPacket;
 import com.brownbear85.onyxarcanix.networking.packets.ItemStackSyncC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,10 +29,10 @@ public class ModNetworking {
 
         INSTANCE = net;
 
-        net.messageBuilder(ExampleC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ExampleC2SPacket::new)
-                .encoder(ExampleC2SPacket::toBytes)
-                .consumerMainThread(ExampleC2SPacket::handle)
+        net.messageBuilder(TestC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(TestC2SPacket::new)
+                .encoder(TestC2SPacket::toBytes)
+                .consumerMainThread(TestC2SPacket::handle)
                 .add();
 
         net.messageBuilder(ItemStackSyncC2SPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)

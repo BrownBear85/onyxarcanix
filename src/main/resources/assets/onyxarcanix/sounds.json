@@ -10,5 +10,11 @@
     "sounds": [
       "onyxarcanix:altar_finish"
     ]
+  },
+  "cast_spell": {
+    "subtitle": "sounds.onyxarcanix.cast_spell",
+    "sounds": [
+      "onyxarcanix:spell_cast"
+    ]
   }
 }

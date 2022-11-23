@@ -37,6 +37,9 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
+            args '--uuid', 'e01b8592c9f542d9a734252e4ad6780b'
+            args '--username=bonker'
+
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.

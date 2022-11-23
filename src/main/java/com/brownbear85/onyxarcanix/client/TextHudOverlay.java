@@ -34,7 +34,7 @@ public class TextHudOverlay {
         if (Minecraft.getInstance().level == null || result == null || result.getType() != HitResult.Type.BLOCK) {
             return;
         }
-        BlockState state = Minecraft.getInstance().level.getBlockState(new BlockPos(((BlockHitResult) result).getBlockPos()));
+        BlockState state = Minecraft.getInstance().level.getBlockState(((BlockHitResult) result).getBlockPos());
         if (state.getBlock() instanceof ChiselableBlock) {
             ChiselableBlock.Runes rune = state.getValue(ChiselableBlock.RUNE);
             if (rune == ChiselableBlock.Runes.BLANK) {
