@@ -1,5 +1,6 @@
-package com.brownbear85.onyxarcanix.spell;
+package com.brownbear85.onyxarcanix.init;
 
+import com.brownbear85.onyxarcanix.spell.Spell;
 import com.brownbear85.onyxarcanix.spell.spells.FireShotSpell;
 import com.brownbear85.onyxarcanix.spell.spells.RegrowthSpell;
 import com.brownbear85.onyxarcanix.spell.spells.ZapShotSpell;
@@ -7,7 +8,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class Spells {
+public class SpellInit {
     public static final Object2ObjectArrayMap<String, Spell> REGISTRY = new Object2ObjectArrayMap<>();
 
     public static void registerSpells() {

@@ -1,6 +1,6 @@
 package com.brownbear85.onyxarcanix.items;
 
-import com.brownbear85.onyxarcanix.spell.Spells;
+import com.brownbear85.onyxarcanix.init.SpellInit;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.ListTag;
@@ -29,8 +29,8 @@ public class Wand extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         List<Tag> list = stack.getTag().getList("spells", 8);
-        String spell = list.get(0).getAsString();
-        if (Spells.castSpell(pLevel, pPlayer, spell)) {
+        String spell = list.get(stack.getTag().getInt("selected")).getAsString();
+        if (SpellInit.castSpell(pLevel, pPlayer, spell)) {
             pPlayer.swing(pUsedHand);
             return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
         }
@@ -49,11 +49,14 @@ public class Wand extends Item {
         if (!stack.getTag().contains("spells")) {
             stack.getTag().put("spells", new ListTag());
         }
+        if (!stack.getTag().contains("selected")) {
+            stack.getTag().putInt("selected", 0);
+        }
     }
 
     public static ItemStack addSpell(ItemStack stack, String spell) {
         addWandNBT(stack);
-        ListTag list = stack.getTag().getList("spells", 8);;
+        ListTag list = stack.getTag().getList("spells", 8);
         if (list.size() < SPELL_SLOTS && !list.contains(spell)) {
             list.add(StringTag.valueOf(spell));
         }
@@ -66,6 +69,19 @@ public class Wand extends Item {
         if (list.contains(spell)) {
             list.remove(StringTag.valueOf(spell));
         }
+        return stack;
+    }
+
+    public static ItemStack cycleSelected(ItemStack stack, int amount) {
+        addWandNBT(stack);
+        int spellsSize = stack.getTag().getList("spells", 8).size();
+        int selected = stack.getTag().getInt("selected") + amount;
+        if (selected > spellsSize - 1) {
+            selected -= spellsSize;
+        } else if (selected < 0) {
+            selected = spellsSize + selected;
+        }
+        stack.getTag().putInt("selected", selected);
         return stack;
     }
 

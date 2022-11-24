@@ -4,6 +4,7 @@ import com.brownbear85.onyxarcanix.OnyxArcanix;
 import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
 import com.brownbear85.onyxarcanix.networking.packets.TestC2SPacket;
 import com.brownbear85.onyxarcanix.networking.packets.ItemStackSyncC2SPacket;
+import com.brownbear85.onyxarcanix.networking.packets.WandSwitchSelectedSpellC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -45,6 +46,12 @@ public class ModNetworking {
                 .decoder(ChiselCycleRuneC2SPacket::new)
                 .encoder(ChiselCycleRuneC2SPacket::toBytes)
                 .consumerMainThread(ChiselCycleRuneC2SPacket::handle)
+                .add();
+
+        net.messageBuilder(WandSwitchSelectedSpellC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(WandSwitchSelectedSpellC2SPacket::new)
+                .encoder(WandSwitchSelectedSpellC2SPacket::toBytes)
+                .consumerMainThread(WandSwitchSelectedSpellC2SPacket::handle)
                 .add();
     }
 

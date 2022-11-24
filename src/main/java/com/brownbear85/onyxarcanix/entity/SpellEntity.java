@@ -3,7 +3,7 @@ package com.brownbear85.onyxarcanix.entity;
 import com.brownbear85.onyxarcanix.init.EntityTypeInit;
 import com.brownbear85.onyxarcanix.particle.MagicParticleOptions;
 import com.brownbear85.onyxarcanix.spell.Spell;
-import com.brownbear85.onyxarcanix.spell.Spells;
+import com.brownbear85.onyxarcanix.init.SpellInit;
 import com.brownbear85.onyxarcanix.spell.spells.ProjectileSpell;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -38,7 +38,7 @@ public class SpellEntity extends Projectile {
         spellEntity.setSpell(spell);
         spellEntity.setPos(shooter.getPosition(0).add(0.0, shooter.getEyeHeight(), 0.0));
         spellEntity.setOwner(shooter);
-        spellEntity.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 0.25F, 0F);
+        spellEntity.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 0.35F, 0F);
         level.addFreshEntity(spellEntity);
     }
 
@@ -61,7 +61,7 @@ public class SpellEntity extends Projectile {
 
     @Override
     protected void onHit(HitResult pResult) {
-        Spell spell = Spells.get(this.getSpell());
+        Spell spell = SpellInit.get(this.getSpell());
         if (spell instanceof ProjectileSpell) {
             HitResult result = ProjectileUtil.getHitResult(this, this::canHitEntity);
             ((ProjectileSpell) spell).onProjectileHit(level, this.getOwner(), this, result);

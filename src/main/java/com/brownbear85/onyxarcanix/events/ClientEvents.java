@@ -2,6 +2,7 @@ package com.brownbear85.onyxarcanix.events;
 
 import com.brownbear85.onyxarcanix.OnyxArcanix;
 import com.brownbear85.onyxarcanix.blocks.entities.renderer.ItemHolderBlockEntityRenderer;
+import com.brownbear85.onyxarcanix.client.SpellHudOverlay;
 import com.brownbear85.onyxarcanix.client.TextHudOverlay;
 import com.brownbear85.onyxarcanix.init.BlockEntityInit;
 
@@ -10,6 +11,7 @@ import com.brownbear85.onyxarcanix.networking.ModNetworking;
 import com.brownbear85.onyxarcanix.networking.packets.ChiselCycleRuneC2SPacket;
 import com.brownbear85.onyxarcanix.client.KeyBindings;
 import com.brownbear85.onyxarcanix.networking.packets.TestC2SPacket;
+import com.brownbear85.onyxarcanix.networking.packets.WandSwitchSelectedSpellC2SPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -39,6 +41,20 @@ public class ClientEvents {
                     ModNetworking.sendToServer(new TestC2SPacket(player.getItemInHand(InteractionHand.MAIN_HAND)));
                 }
             }
+            if (KeyBindings.SWITCH_SPELL_LEFT.consumeClick()) {
+                Player player = Minecraft.getInstance().player;
+                ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
+                if (stack.is(ItemInit.WAND.get())) {
+                    ModNetworking.sendToServer(new WandSwitchSelectedSpellC2SPacket(stack, -1));
+                }
+            }
+            if (KeyBindings.SWITCH_SPELL_RIGHT.consumeClick()) {
+                Player player = Minecraft.getInstance().player;
+                ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
+                if (stack.is(ItemInit.WAND.get())) {
+                    ModNetworking.sendToServer(new WandSwitchSelectedSpellC2SPacket(stack, 1));
+                }
+            }
         }
     }
 
@@ -47,8 +63,10 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
+            //event.register(KeyBindings.TEST);
             event.register(KeyBindings.CYCLE_RUNE);
-            event.register(KeyBindings.TEST);
+            event.register(KeyBindings.SWITCH_SPELL_LEFT);
+            event.register(KeyBindings.SWITCH_SPELL_RIGHT);
         }
 
         @SubscribeEvent
@@ -62,6 +80,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
             event.registerAboveAll("chisel", TextHudOverlay.HUD_CHISEL);
+            event.registerBelowAll("spell", SpellHudOverlay.HUD_SPELL);
         }
     }
 }

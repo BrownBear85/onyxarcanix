@@ -1,6 +1,7 @@
 package com.brownbear85.onyxarcanix.spell;
 
 import com.brownbear85.onyxarcanix.init.SoundInit;
+import com.brownbear85.onyxarcanix.init.SpellInit;
 import com.mojang.math.Vector3f;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -9,7 +10,7 @@ import net.minecraft.world.level.Level;
 
 public abstract class Spell {
     public Spell(String id) {
-        Spells.REGISTRY.put(id, this);
+        SpellInit.REGISTRY.put(id, this);
         this.id = id;
     }
 

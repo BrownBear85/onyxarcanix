@@ -3,7 +3,7 @@ package com.brownbear85.onyxarcanix;
 import com.brownbear85.onyxarcanix.init.*;
 import com.brownbear85.onyxarcanix.init.RecipeInit;
 import com.brownbear85.onyxarcanix.items.Spellbook;
-import com.brownbear85.onyxarcanix.spell.Spells;
+import com.brownbear85.onyxarcanix.init.SpellInit;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
@@ -39,7 +39,7 @@ public class OnyxArcanix {
         SoundInit.register(bus);
         EntityTypeInit.register(bus);
 
-        Spells.registerSpells();
+        SpellInit.registerSpells();
     }
 
     public static final CreativeModeTab MAIN_TAB = new CreativeModeTab(MODID) {
